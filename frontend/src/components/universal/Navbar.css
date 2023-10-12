@@ -1,0 +1,103 @@
+.navbar {
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 10;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+}
+
+.logo-container {
+  height: 80%;
+}
+
+.house-logo {
+  height: 12px;
+
+}
+
+.logo-img {
+  height: 4rem;
+  padding: 1rem 2rem;
+}
+
+.navbar-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar-ul li {
+  padding: 0 2rem;
+
+}
+
+.navlink {
+  text-decoration: none;
+  font-family: 'Montserrat';
+  color: black;
+}
+
+.meny {
+  height: 2rem;
+  cursor: pointer;
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 6.3rem;
+  width: 31.2rem;
+  height: 100%;
+  background: rgba(247, 245, 245, 0.9);
+  color: black;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 80%;
+  border-bottom: 1px solid #5c5c5c;
+  margin: 1.5rem 0 1.5rem;
+}
+
+.hamburger-ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 5rem 0 0 0;
+  width: 80%;
+}
+
+.navlink-burger {
+  text-decoration: none;
+  color: black;
+  font-family: 'Montserrat';
+  font-size: 1.5rem;
+}
+
+.login-btn {
+  border-radius: 1.875rem;
+  border: none;
+  background: #E78121;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: white;
+  width: 8rem;
+  height: 2.5rem;
+  font-family: 'Montserrat';
+  z-index: 100;
+  cursor: pointer;
+}
