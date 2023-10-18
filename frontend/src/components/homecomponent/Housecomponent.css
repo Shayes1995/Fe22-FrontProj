@@ -74,24 +74,22 @@
   max-width: 30px;
   max-height: 30px;
   object-fit: contain;
-  /* ensures the image content scales correctly */
+
 }
 
 .house-listing {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  /* Spacing between cards */
   justify-content: space-around;
-  /* Center the cards */
 }
+
+
 
 .apartement-item {
   border-radius: 5px;
   padding: 20px;
   width: 300px;
-
-  /* or whatever fixed width you want or use max-width for responsiveness */
   transition: 0.3s;
 }
 
@@ -120,7 +118,6 @@ h3 {
 
 .apartement-image img {
   max-width: 100%;
-  /* to make sure images are not larger than the card */
   height: auto;
   border-radius: 0.625rem;
 }
@@ -132,7 +129,6 @@ h3 {
 .carousel-dots {
   position: absolute;
   bottom: 10px;
-  /* Adjust to fit your design needs. */
   left: 50%;
   transform: translateX(-50%);
   display: flex;

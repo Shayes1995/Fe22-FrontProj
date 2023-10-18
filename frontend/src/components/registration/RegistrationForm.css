@@ -1,0 +1,161 @@
+.div-main-container-register {
+  padding: 0;
+  margin: 0;
+}
+
+.register-container {
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.register-container-form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-hero {
+  height: 30rem;
+  width: 100%;
+  background-image: url('../img/imgLogin/heroLogin.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  object-fit: cover;
+
+}
+
+.register-hero img {
+  margin: 0;
+  padding: 0;
+}
+
+.header-register-text h1 {
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.header-register-text p {
+  font-family: 'Montserrat';
+  text-align: start;
+  font-size: 1rem;
+}
+
+.header-register-text {
+  width: 70%;
+}
+
+.registerLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  max-width: 25rem;
+  margin: auto;
+  padding-top: 3rem;
+}
+
+.registerLogo img {
+  width: 100%;
+  max-width: 25rem;
+  display: block;
+}
+
+.form-parent-register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-parent-register p {
+  text-align: center;
+  font-family: 'Montserrat';
+  font-size: 1.2rem;
+}
+
+
+.register-container-form p {
+  text-align: center;
+  font-family: 'Montserrat';
+  font-size: 1.2rem;
+}
+
+.form-register {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  min-width: 27rem;
+
+}
+
+
+
+.register-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 0 0;
+  width: 32rem;
+  min-width: 15rem;
+}
+
+
+
+.register-input {
+  border-radius: 0.375rem;
+  background: #F2F2F2;
+  border: none;
+  width: 80%;
+  max-width: 30rem;
+  height: 3.1875rem;
+  flex-shrink: 0;
+  font-family: 'Montserrat';
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  padding-left: .5rem;
+}
+
+.register-page-btn {
+  border-radius: 1.875rem;
+  border: none;
+  background: #E78121;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: white;
+  width: 8rem;
+  height: 2.5rem;
+  font-family: 'Montserrat';
+  z-index: 100;
+  cursor: pointer;
+  align-self: center;
+  margin-bottom: 5rem;
+  margin-top: 2rem;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.checkbox-group p {
+  padding-left: 1rem;
+  font-size: 1rem;
+
+}

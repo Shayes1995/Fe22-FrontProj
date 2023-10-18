@@ -10,6 +10,12 @@ import unitRoomImg from '../img/imgDetailshouse/unitRoom.png';
 import unitCollectiveImg from '../img/imgDetailshouse/unitCollective.png';
 import unitHouseImg from '../img/imgDetailshouse/unitHouse.png';
 import StudyStayLogo from '../img/imgDetailshouse/descriptionLogo.png';
+import ElImage from '../img/imgDetailshouse/El.png';
+import BalconyImg from '../img/imgDetailshouse/BalconyImg.png';
+import ElevatorImg from '../img/imgDetailshouse/ElevatorImg.png';
+import WifiImg from '../img/imgDetailshouse/WifiImg.png';
+import KitchenImg from '../img/imgDetailshouse/KitchenImg.png';
+import DishwasherImg from '../img/imgDetailshouse/DishwasherImg.png';
 
 const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
 
@@ -52,6 +58,42 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
         return 'Hus';
       default:
         return unitType;
+    }
+  }
+  const getUnitIncludeDisplay = (includes: string) => {
+    switch (includes) {
+      case 'Kitchen':
+        return 'Kök';
+      case 'Wifi':
+        return 'Wi-Fi';
+      case 'Dishwasher':
+        return 'Tvättmaskin';
+      case 'Balcony':
+        return 'Balkong';
+      case 'Electricity':
+        return 'El';
+      case 'Elevator':
+        return 'Hiss';
+      default:
+        return includes;
+    }
+  }
+  const getUnitIncludeImage = (includes: string) => {
+    switch (includes) {
+      case 'Kitchen':
+        return KitchenImg;
+      case 'Wifi':
+        return WifiImg;
+      case 'Dishwasher':
+        return DishwasherImg;
+      case 'Balcony':
+        return BalconyImg;
+      case 'Electricity':
+        return ElImage;
+      case 'Elevator':
+        return ElevatorImg;
+      default:
+        return includes;
     }
   }
 
@@ -183,8 +225,17 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
               <button className='apply-btn'>TILL ANSÖKAN</button>
             </div>
             <div className="includes-apartement">
-
+              {apartement.includes.map((include, index) => (
+                <div className="include-item" key={index}>
+                  <div className="includes-box">
+                    <img src={getUnitIncludeImage(include.name)} alt={include.name} />
+                  </div>
+                  <p>{getUnitIncludeDisplay(include.name)}</p>
+                </div>
+              ))}
             </div>
+
+
           </div>
         </div>
       </div>

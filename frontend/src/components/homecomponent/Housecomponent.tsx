@@ -17,11 +17,11 @@ const Housecomponent = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost:9997/api/apartement')
+    fetch('http://localhost:9998/api/apartement')
       .then(response => response.json())
       .then(data => {
         setApartements(data);
-        console.log(data);  // Log the fetched data
+        console.log(data); 
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
@@ -87,7 +87,6 @@ const Housecomponent = () => {
             <p>{apartement.area}</p>
             <p>{apartement.rent}kr/månad</p>
             <p>{apartement.rooms} RoK</p>
-            {/* Display other properties of apartement here, as needed */}
           </div>
         ))}
       </div>

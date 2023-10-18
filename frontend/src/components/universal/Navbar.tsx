@@ -6,10 +6,12 @@ import ProfileBtn from '../img/imgNavbar/ProfileBtn.png';
 import './Navbar.css'
 import { useState } from 'react';
 import { motion } from 'framer-motion'
+import { useAuth } from '../../context/ContextProvider';
 
 
 const Navbar = () => {
 
+  const { token, setToken } = useAuth();
   const [menuVisible, setMenuVisible] = useState("closed");
 
 
@@ -23,20 +25,26 @@ const Navbar = () => {
     setMenuVisible(prevState => (prevState === "open" ? "closed" : "open"));
   };
 
+  const handleLogout = () => {
+    setToken(null);
+    console.log(token)
+  };
+
   return (
     <nav className='navbar'>
       <div className="logo-container">
         <img className='logo-img' src={logo} alt="Navbar Logo" />
       </div>
       <ul className='navbar-ul'>
-        {/* <li className='navbar-li'>
-          <NavLink className='navlink' to="/">Om Oss </NavLink>
-        </li>
+        {/* 
+            <li className='navbar-li'>
+                <NavLink className='navlink' to="/">Om Oss </NavLink>
+            </li>
+            <li className='navbar-li'>
+                <NavLink className='navlink' to="/">Hyr Ut <img className='house-logo' src={House} alt="" /></NavLink>
+            </li>
+            */}
         <li className='navbar-li'>
-          <NavLink className='navlink' to="/">Hyr Ut <img className='house-logo' src={House} alt="" /></NavLink>
-        </li> */}
-        <li className='navbar-li'>
-
           <img className='meny' src={ProfileBtn} alt="" onClick={toggleMenu} />
         </li>
       </ul>
@@ -47,18 +55,10 @@ const Navbar = () => {
         animate={menuVisible}
         variants={menuVariants}
       >
-
         <ul className='hamburger-ul'>
+
           <li className='hamburger-li'>
-            <NavLink className='navlink-burger' to="/min-profil">Min profil</NavLink>
-          </li>
-          <span className='divider'></span>
-          <li className='hamburger-li'>
-            <NavLink className='navlink-burger' to="/bostader">Bostäder</NavLink>
-          </li>
-          <span className='divider'></span>
-          <li className='hamburger-li'>
-            <NavLink className='navlink-burger' to="/ansokningar">Ansökningar</NavLink>
+            <NavLink className='navlink-burger' to="/">Bostäder</NavLink>
           </li>
           <span className='divider'></span>
           <li className='hamburger-li'>
@@ -75,12 +75,28 @@ const Navbar = () => {
           <span className='divider'></span>
         </ul>
 
-        <button className='login-btn'>LOGGA IN</button>
-
+        {token ? (
+          <button className='logout-btn' onClick={handleLogout}>
+            LOGGA UT
+          </button>
+        ) : (
+          <>
+            <button className='login-btn'>
+              <NavLink className='navlink-account' to="/login">
+                LOGGA IN
+              </NavLink>
+            </button>
+            <button className='login-btn'>
+              <NavLink className='navlink-account' to="/registration">
+                REGISTRERA DIG
+              </NavLink>
+            </button>
+          </>
+        )}
       </motion.div>
-
     </nav>
   );
+
 }
 
 export default Navbar;

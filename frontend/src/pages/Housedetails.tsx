@@ -4,12 +4,12 @@ import Detailshouse from '../components/detailshousecomponent/Detailshouse';
 import { Apartement } from '../typescriptHelpers/apartements';
 
 const Housedetails = () => {
-  const { id } = useParams(); // get the _id from the URL
+  const { id } = useParams(); // to get id from the URL
 
   const [apartement, setApartement] = useState<Apartement | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:9997/api/apartement/${id}`)
+    fetch(`http://localhost:9998/api/apartement/${id}`)
       .then(response => response.json())
       .then(data => {
         setApartement(data);

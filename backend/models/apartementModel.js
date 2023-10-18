@@ -40,7 +40,7 @@ exports.getApartements = (req, res) => {
 }
 
 exports.getApartementById = (req, res) => {
-  const apartementId = req.params.id; // Get the ID from the request parameters
+  const apartementId = req.params.id; 
 
   Apartement.findById(apartementId)
     .then(apartement => {
