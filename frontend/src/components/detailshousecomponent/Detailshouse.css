@@ -1,5 +1,5 @@
 .details-container {
-  padding: 4rem;
+  padding: .5rem;
 }
 
 .details-column {
@@ -28,25 +28,28 @@
   flex-direction: row;
   justify-content: space-between;
   gap: .3rem;
+
 }
 
 .image-box-one {
   flex: 1;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 4;
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+
 }
 
 .big-img {
   width: 100%;
   height: 100%;
-  max-height: 30.6875rem;
-  max-width: 20rem;
   object-fit: cover;
   border-radius: 10px;
   align-self: center;
+  max-width: 18.32688rem;
+  max-height: 26.64681rem;
+  flex-shrink: 0;
 }
 
 .rightside-img {
@@ -65,8 +68,8 @@
 .vertical-img {
   width: 100%;
   height: 100%;
-  max-height: 13.925rem;
-  max-width: 22.25rem;
+  max-width: 21.49469rem;
+  max-height: 13.14969rem;
   flex-shrink: 0;
   object-fit: cover;
   display: block;
@@ -74,12 +77,13 @@
 }
 
 .details-house {
-  height: 5rem;
+  height: 4rem;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding-top: 1rem;
+
 }
 
 .box-container {
@@ -138,7 +142,6 @@
 .details-row-second-images {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
 }
 
 .div-for-second-row {
@@ -149,19 +152,21 @@
 
 
 .image-box-two {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 5;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-left: 8px;
+  margin: .5rem;
+
 }
 
 .second-big-img {
   width: 100%;
   height: 100%;
-  max-height: 30.6875rem;
-  max-width: 15.3rem;
+  max-width: 14rem;
+  max-height: 18.875rem;
+  flex-shrink: 0;
   object-fit: cover;
   border-radius: 10px;
   align-self: center;
@@ -290,17 +295,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
-
 }
 
 .includes-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 3rem;
-  height: 3rem;
-
 }
 
 .includes-apartement {
@@ -386,4 +386,9 @@
   font-weight: 300;
   line-height: normal;
   text-align: center;
+}
+
+.btn-apply-container {
+  display: flex;
+  justify-content: center;
 }

@@ -1,4 +1,4 @@
-const Register = require('../schemas/registerSchema');
+const User = require('../schemas/userSchema');
 const bcrypt = require('bcryptjs');
 const auth = require('../authenticator/auth');
 
@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const passwordHasher = bcrypt.hashSync(password, salt);
 
-    const newUserRegistration = new Register({
+    const newUserRegistration = new User({
       firstName,
       lastName,
       email,
@@ -39,7 +39,7 @@ exports.loginUser = async (req, res) => {
 
   try {
     // find user by email
-    const user = await Register.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({
         message: 'Authentication failed. User not found.'
@@ -57,9 +57,12 @@ exports.loginUser = async (req, res) => {
 
 
     res.status(200).json({
+
       message: 'User logged in successfully',
-      // create a token
       token: auth.createJwt(user),
+      firstName: user.firstName,
+      id: user._id
+
     });
   } catch (err) {
     res.status(500).json({

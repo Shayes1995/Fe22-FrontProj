@@ -1,0 +1,237 @@
+.apply-main {
+  padding: .5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.apply-container {
+  padding-top: 5rem;
+  margin-top: 4rem;
+  padding-bottom: 4rem;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.header-application h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 3.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.header-application {
+  width: 100%;
+  max-width: 63rem;
+}
+
+.apply-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.apply-content-left-top {
+  width: 100%;
+}
+
+.apply-content-left-bottom {
+  width: 100%;
+  max-width: 25.25rem;
+  background-color: #E9E9E9;
+  border-radius: 1rem;
+
+}
+
+.apply-content-left-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 37rem;
+}
+
+.box-image-apply {
+  flex: 1;
+  aspect-ratio: 5 / 6;
+  max-height: 30rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.image-box-apply-one {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  align-self: flex-start;
+  max-width: 25.32688rem;
+  max-height: 28.64681rem;
+  flex-shrink: 0;
+
+}
+
+
+.over-view-container {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  max-width: 25.25rem;
+  max-height: 21rem;
+  flex-shrink: 0;
+
+
+}
+
+.overview-info-container {
+  box-sizing: border-box;
+  padding: 0 2rem 0rem 2rem;
+  border-radius: 1rem;
+
+
+}
+
+.overview-info-container h5 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+
+.over-view-row-apartement-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box
+}
+
+.over-view-apartement-info-box {
+  width: 45%;
+
+}
+
+.over-view-info-p-one {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.over-view-info-p-two {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.apply-content-right-side {
+  width: 50%;
+  max-width: 37rem;
+}
+
+.apply-content-right-botton {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.demand-p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.li-demands span {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.read-p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  padding-top: 2rem;
+}
+
+.ordered-list {
+  gap: 1rem;
+}
+
+.li-demands {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  padding-top: .7rem;
+}
+
+.group-apply {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  align-items: center;
+}
+
+.group-apply p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.checkbox-apply {
+  border-radius: 50%;
+  background: #000000;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.apply-btn-apartement {
+  border-radius: 1.875rem;
+  background: #E78121;
+  width: 9.54325rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  align-self: flex-end;
+}

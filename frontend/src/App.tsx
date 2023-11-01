@@ -6,6 +6,9 @@ import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Rootlayout from './rootlayout/Rootlayout'
 import ContextProvider from './context/ContextProvider'
+import Apply from './pages/Apply'
+import ProtectedRoute from './protectedRoute/ProtectedRoute'
+import UserApplications from './pages/UserApplications'
 
 const App = () => {
 
@@ -29,7 +32,20 @@ const App = () => {
         {
           path: '/registration',
           element: <Registration />
-
+        },
+        {
+          path: '/apply/:id',
+          element:
+            <ProtectedRoute>
+              <Apply />
+            </ProtectedRoute>
+        },
+        {
+          path: '/mina-ansokningar',
+          element:
+          <ProtectedRoute>
+            <UserApplications />
+          </ProtectedRoute>
         }
       ]
     }

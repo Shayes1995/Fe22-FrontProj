@@ -1,11 +1,10 @@
 import React from 'react'
 import { Users } from '../../typescriptHelpers/users'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import studystaylogo from '../img/imgRegister/studystaylogo.png'
 import './RegistrationForm.css'
 
 const RegistrationForm: React.FC = () => {
-  const [message, setMessage] = useState<string | null>(null);
   const [registerData, setRegisterData] = useState<Users>({
     firstName: '',
     lastName: '',
@@ -30,7 +29,7 @@ const RegistrationForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(registerData)
+        body: JSON.stringify(registerData) 
       });
 
       if (!response.ok) {
@@ -38,10 +37,10 @@ const RegistrationForm: React.FC = () => {
       }
 
       const data = await response.json();
-      setMessage(data.message);
+
     } catch (error) {
       console.error('Error during fetch:', error);
-      setMessage('There was an error processing your request.');
+
     }
   }
 

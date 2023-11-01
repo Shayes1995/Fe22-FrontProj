@@ -10,12 +10,14 @@ import unitRoomImg from '../img/imgDetailshouse/unitRoom.png';
 import unitCollectiveImg from '../img/imgDetailshouse/unitCollective.png';
 import unitHouseImg from '../img/imgDetailshouse/unitHouse.png';
 import StudyStayLogo from '../img/imgDetailshouse/descriptionLogo.png';
-import ElImage from '../img/imgDetailshouse/El.png';
-import BalconyImg from '../img/imgDetailshouse/BalconyImg.png';
-import ElevatorImg from '../img/imgDetailshouse/ElevatorImg.png';
-import WifiImg from '../img/imgDetailshouse/WifiImg.png';
-import KitchenImg from '../img/imgDetailshouse/KitchenImg.png';
-import DishwasherImg from '../img/imgDetailshouse/DishwasherImg.png';
+import { AiOutlineWifi } from 'react-icons/ai';
+import { FaCar } from 'react-icons/fa';
+import { BiSolidWasher } from 'react-icons/bi';
+import { MdBalcony } from 'react-icons/md';
+import { PiElevatorLight } from 'react-icons/pi';
+import { FcElectricity } from 'react-icons/fc';
+import { PiCookingPot } from 'react-icons/pi';
+import { NavLink } from 'react-router-dom';
 
 const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
 
@@ -81,21 +83,23 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
   const getUnitIncludeImage = (includes: string) => {
     switch (includes) {
       case 'Kitchen':
-        return KitchenImg;
+        return <PiCookingPot className='icon-logs' />;
       case 'Wifi':
-        return WifiImg;
+        return <AiOutlineWifi className='icon-logs' />;
       case 'Dishwasher':
-        return DishwasherImg;
+        return <BiSolidWasher className='icon-logs' />;
       case 'Balcony':
-        return BalconyImg;
+        return <MdBalcony className='icon-logs' />;
       case 'Electricity':
-        return ElImage;
+        return <FcElectricity className='icon-logs' />;
       case 'Elevator':
-        return ElevatorImg;
+        return <PiElevatorLight className='icon-logs' />;
       default:
         return includes;
     }
   }
+
+
 
 
   return (
@@ -180,7 +184,6 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
             </div>
           </div>
         </div>
-
         <div className="details-description-flex-row">
           <div className="details-description-left">
             <h2>{apartement.street}</h2>
@@ -222,17 +225,24 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
                 </div>
                 <p className='apply-p'>Ansökan är öppen och görs via vår bostadskö.</p>
               </div>
-              <button className='apply-btn'>TILL ANSÖKAN</button>
+              <div className="btn-apply-container">
+                <NavLink to={`/apply/${apartement._id}`}>
+                  <button className='apply-btn'>TILL ANSÖKAN</button>
+                </NavLink>
+              </div>
+
+
             </div>
             <div className="includes-apartement">
               {apartement.includes.map((include, index) => (
                 <div className="include-item" key={index}>
                   <div className="includes-box">
-                    <img src={getUnitIncludeImage(include.name)} alt={include.name} />
+                    {getUnitIncludeImage(include.name)}
+                    <p>{getUnitIncludeDisplay(include.name)}</p>
                   </div>
-                  <p>{getUnitIncludeDisplay(include.name)}</p>
                 </div>
               ))}
+
             </div>
 
 

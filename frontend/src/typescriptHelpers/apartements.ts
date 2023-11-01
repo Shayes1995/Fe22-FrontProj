@@ -20,7 +20,6 @@ export interface Apartement {
   apply: string;
   includes: {
     name: string;
-    url: string;
   }[];
   status: boolean;
 }
@@ -28,3 +27,12 @@ export interface Apartement {
 export interface DetailshouseProps {
   apartement: Apartement | null;
 }
+
+export enum BuildingType {
+  APARTMENT = 'unitApartement',
+  HOUSE = 'unitHouse',
+  ROOM = 'unitRoom',
+  COLLECTIVE = 'unitCollective',
+}
+
+export type QuickFilterType = BuildingType | null;

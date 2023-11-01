@@ -41,6 +41,7 @@ const LoginForm = () => {
       })
       .then(data => {
         console.log('Token:', data.token);
+        console.log(data)
         setToken(data.token);
         navigate('/');
       })
