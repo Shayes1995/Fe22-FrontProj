@@ -1,0 +1,224 @@
+.user-applications-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-user-applications {
+  margin-top: 4rem;
+  width: 80%;
+  max-width: 60.75rem;
+
+
+}
+
+.intro-user-applications h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 3.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+
+  @media screen and (max-width:768px) {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.intro-user-applications p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.875rem;
+
+
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.applications-render-container {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+
+  @media screen and (max-width:768px) {
+    width: 100%;
+  }
+}
+
+.application-item {
+  height: 22.25rem;
+
+  max-width: 35rem;
+  width: 100%;
+}
+
+.image-container-my-app {
+  width: 100%;
+  height: 11.58931rem;
+  overflow: hidden;
+  border-radius: .5rem;
+
+  @media screen and (max-width:768px) {
+    border-radius: .5rem;
+
+    @media screen and (max-width:556px) {
+      border-radius: 0;
+      height: 9.5rem;
+    }
+  }
+}
+
+.image-container-my-app img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  @media screen and (max-width:556px) {
+    height: 9.5rem;
+  }
+}
+
+.info-container-my-app {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+
+  @media screen and (max-width:768px) {
+    width: 100%;
+  }
+
+}
+
+.info-my-app-left {
+  width: 16.6rem;
+  height: 6.8rem;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width:768px) {
+    width: 45%;
+  }
+}
+
+.residental-name-my-app {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.625rem;
+  margin: .2rem;
+}
+
+.residental-name-my-app-short {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.625rem;
+  margin: 0;
+
+}
+
+.section-residental {
+  margin: 0;
+  padding: 0;
+}
+
+.info-my-app-right {
+  width: 16.6rem;
+  height: 6.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: flex-end;
+
+  @media screen and (max-width:768px) {
+    width: 45%;
+  }
+}
+
+.status-group {
+  display: flex;
+  flex-direction: row;
+  width: 12.5rem;
+
+  @media screen and (max-width:768px) {
+    width: 8.75rem;
+    height: 2.39738rem;
+    flex-shrink: 0;
+  }
+}
+
+.status-my-app {
+  margin: 0;
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.625rem;
+  margin: 0;
+}
+
+.circle-span-status {
+  height: 1rem;
+  width: 1rem;
+  margin: .3rem;
+  border-radius: 10px;
+}
+
+.pending-status {
+  background-color: grey;
+}
+
+.approved-status {
+  background-color: #09e748;
+}
+
+.rejected-status {
+  background-color: red;
+}
+
+.my-app-btn {
+  width: 12.63144rem;
+  height: 2.91756rem;
+  flex-shrink: 0;
+  background-color: #E78121;
+  color: #FFF;
+  border: none;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: .5rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 1.5rem;
+
+  @media screen and (max-width:768px) {
+    width: 8.75rem;
+    height: 2.39738rem;
+    flex-shrink: 0;
+  }
+}

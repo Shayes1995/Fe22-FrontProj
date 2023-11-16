@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './Footer.css'
 import { NavLink } from 'react-router-dom'
 import instagramLogo from '../img/imgFooter/insta.png'
@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-box">
           <h3 className='footer-h3'>Stöd</h3>
-          <ul className='footer-ul'>
+          <ul className='footer-ul left-ul'>
             <li className='footer-li'>
               <NavLink className='navlink-footer' to='/'>Hjälpcenter</NavLink>
             </li>
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <div className="footer-box">
           <h3 className='footer-h3'>Värdskap</h3>
-          <ul className='footer-ul'>
+          <ul className='footer-ul middle-ul'>
             <li className='footer-li'>
               <NavLink className='navlink-footer' to='/'>Hyr ut ditt boende på StudyStay</NavLink>
             </li>
@@ -50,21 +50,21 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-box">
-          <h3 className='footer-h3'>StudyStay</h3>
-          <ul className='footer-ul'>
-            <li className='footer-li'>
+          <h3 className='footer-h3 right-align'>StudyStay</h3>
+          <ul className='footer-ul right-ul'>
+            <li className='footer-li right-align'>
               <NavLink className='navlink-footer' to='/'>Pressrum</NavLink>
             </li>
-            <li className='footer-li'>
+            <li className='footer-li right-align'>
               <NavLink className='navlink-footer' to='/'>Nya funktioner</NavLink>
             </li>
-            <li className='footer-li'>
+            <li className='footer-li right-align'>
               <NavLink className='navlink-footer' to='/'>Lediga tjänster</NavLink>
             </li>
-            <li className='footer-li'>
+            <li className='footer-li right-align'>
               <NavLink className='navlink-footer' to='/'>Investerare</NavLink>
             </li>
-            <li className='footer-li'>
+            <li className='footer-li right-align'>
               <NavLink className='navlink-footer' to='/'>Nödboenden med StudyStay</NavLink>
             </li>
           </ul>

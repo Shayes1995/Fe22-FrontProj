@@ -9,6 +9,9 @@ import ContextProvider from './context/ContextProvider'
 import Apply from './pages/Apply'
 import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import UserApplications from './pages/UserApplications'
+import Confirm from './pages/Confirm'
+import Payment from './pages/Payment'
+import MyProfile from './pages/MyProfile'
 
 const App = () => {
 
@@ -43,9 +46,30 @@ const App = () => {
         {
           path: '/mina-ansokningar',
           element:
-          <ProtectedRoute>
-            <UserApplications />
-          </ProtectedRoute>
+            <ProtectedRoute>
+              <UserApplications />
+            </ProtectedRoute>
+        },
+        {
+          path: '/mina-ansokningar/:id/',
+          element:
+            <ProtectedRoute>
+              <Confirm />
+            </ProtectedRoute>
+        },
+        {
+          path: '/mina-ansokningar/:applicationId/betalning/:apartementId',
+          element:
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
+        },
+        {
+          path: '/min-profil/:id',
+          element:
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
         }
       ]
     }

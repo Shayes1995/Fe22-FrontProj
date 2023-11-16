@@ -10,5 +10,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/apartement', require('./controllers/apartementController'));
 app.use('/api/user', require('./controllers/userController'));
 app.use('/api/application', require('./controllers/applyapartementController'));
+app.use('/api/payment', require('./controllers/paymentController'));
 
 module.exports = app;

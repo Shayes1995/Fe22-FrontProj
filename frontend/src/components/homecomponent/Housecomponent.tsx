@@ -40,16 +40,19 @@ const Housecomponent = () => {
       .then(response => response.json())
       .then(data => {
         setApartements(data);
-        setFilteredApartments(data); 
+        setFilteredApartments(data);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
 
 
-  const handleDotClick = (apartementId: string, imageName: string) => {
+  const handleDotClick = (e: React.MouseEvent<HTMLSpanElement>, apartementId: string, imageName: string) => {
+    e.preventDefault();
     setActiveImageName(prevState => ({ ...prevState, [apartementId]: imageName }));
   };
+
+
 
   const handleFilterToggle = (type: BuildingType) => {
     if (quickFilterType === type) {
@@ -247,20 +250,29 @@ const Housecomponent = () => {
                   <div key={img.name} className="apartement-image">
                     <img src={img.url} alt={img.name} />
                     <div className="carousel-dots">
-                      <span onClick={() => handleDotClick(apartement._id, 'imgOne')} className={activeImageName[apartement._id] === 'imgOne' ? 'active-dot' : ''}></span>
-                      <span onClick={() => handleDotClick(apartement._id, 'imgTwo')} className={activeImageName[apartement._id] === 'imgTwo' ? 'active-dot' : ''}></span>
-                      <span onClick={() => handleDotClick(apartement._id, 'imgThree')} className={activeImageName[apartement._id] === 'imgThree' ? 'active-dot' : ''}></span>
-                      <span onClick={() => handleDotClick(apartement._id, 'imgFour')} className={activeImageName[apartement._id] === 'imgFour' ? 'active-dot' : ''}></span>
-                      <span onClick={() => handleDotClick(apartement._id, 'imgFive')} className={activeImageName[apartement._id] === 'imgFive' ? 'active-dot' : ''}></span>
+                      <span onClick={(e) => handleDotClick(e, apartement._id, 'imgOne')} className={activeImageName[apartement._id] === 'imgOne' ? 'active-dot' : ''}></span>
+                      <span onClick={(e) => handleDotClick(e, apartement._id, 'imgTwo')} className={activeImageName[apartement._id] === 'imgTwo' ? 'active-dot' : ''}></span>
+                      <span onClick={(e) => handleDotClick(e, apartement._id, 'imgThree')} className={activeImageName[apartement._id] === 'imgThree' ? 'active-dot' : ''}></span>
+                      <span onClick={(e) => handleDotClick(e, apartement._id, 'imgFour')} className={activeImageName[apartement._id] === 'imgFour' ? 'active-dot' : ''}></span>
+                      <span onClick={(e) => handleDotClick(e, apartement._id, 'imgFive')} className={activeImageName[apartement._id] === 'imgFive' ? 'active-dot' : ''}></span>
                     </div>
+
                   </div>
                 ))}
               </NavLink>
             </div>
-            <h3>{apartement.street}, {apartement.zipcode}</h3>
-            <p>{apartement.area}</p>
-            <p>{apartement.rent}kr/månad</p>
-            <p>{apartement.rooms} RoK</p>
+            <div className='quick-info-display'>
+              <div className='quick-info-display-container'>
+                <h3 className='left-side-h3'>{apartement.street}</h3>
+                <p>{apartement.rent}kr/månad</p>
+                <p>{apartement.rooms} RoK</p>
+              </div>
+              <div className='quick-info-display-container right-align-container'>
+                <h3 className='right-side-h3'>{apartement.area}</h3>
+                <p>BRF Lingon</p>
+                <p>{apartement.size}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

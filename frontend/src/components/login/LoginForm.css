@@ -1,6 +1,6 @@
 .div-main-container-login {
   padding: 0;
-  margin: 0;
+  margin-top: 4.2rem;
 }
 
 .login-container {
@@ -16,10 +16,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem;
+  }
+
 }
 
+
 .login-hero {
-  height: 30rem;
+  height: 35.556vh;
   width: 100%;
   background-image: url('../img/imgLogin/heroLogin.png');
   background-size: cover;
@@ -30,6 +36,11 @@
   flex-direction: column;
   object-fit: cover;
 
+  @media screen and (max-width: 768px) {
+    height: 16.075rem;
+
+  }
+
 }
 
 .login-hero img {
@@ -37,23 +48,73 @@
   padding: 0;
 }
 
-.header-login-text h1 {
+.header-login-text-login h1 {
   text-align: center;
   font-family: Montserrat;
   font-size: 3rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media screen and (max-width: 768px) {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: start;
+    margin: 0;
+    padding-bottom: 1rem;
+    margin-top: 2.5rem;
+
+  }
 }
 
-.header-login-text p {
-  font-family: 'Montserrat';
+.p-container-login {
+  display: flex;
+  justify-content: flex-start;
   text-align: start;
+  max-width: 100rem;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    color: #000;
+    font-family: Kumbh Sans;
+    font-size: 3.125rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+  }
+
+}
+
+.p-container-login p {
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+
+
+  }
+
+}
+
+.header-login-p {
+  color: #000;
+  font-family: Kumbh Sans;
   font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+
 }
 
 .header-login-text {
   width: 70%;
+  height: 100%;
+  border: 1px solid black;
+  text-align: start;
 }
 
 .loginLogo {
@@ -68,9 +129,34 @@
 
 .loginLogo img {
   width: 100%;
-  max-width: 25rem;
+  max-width: 17.25rem;
+  max-height: 6.3rem;
   display: block;
+
+  @media screen and (max-width: 768px) {
+    width: 15.375rem;
+    height: 5.75rem;
+    flex-shrink: 0;
+  }
+
 }
+
+.login-text-please {
+
+  @media screen and (max-width: 768px) {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+  }
+}
+
 
 .form-login {
   padding: 0;
@@ -81,13 +167,29 @@
   flex-wrap: wrap;
   width: 100%;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
 }
+
+.wrapper-for-login-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
+}
+
 
 .form-parent {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  max-width: 65.25rem;
 
 
 }
@@ -95,25 +197,45 @@
 .form-parent p {
   text-align: center;
   font-family: 'Montserrat';
-  font-size: 1.2rem;
+
+
 }
 
 
-.login-container-form p {
-  text-align: center;
-  font-family: 'Montserrat';
-  font-size: 1.2rem;
-}
+
 
 .login-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   margin: 0;
   padding: 1rem 0 0;
   width: 100%;
+  flex-wrap: wrap;
+
+
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+
+  }
+
 }
+
+.login-group p {
+  align-self: flex-start;
+
+  @media screen and (max-width: 768px) {
+    align-self: center;
+  }
+}
+
+
+
+
+
 
 
 
@@ -121,14 +243,22 @@
   border-radius: 0.375rem;
   background: #F2F2F2;
   border: none;
-  width: 90%;
-  max-width: 40rem;
-  height: 3.1875rem;
+  width: 100%;
+  max-width: 26rem;
+  height: 2.875rem;
   flex-shrink: 0;
   font-family: 'Montserrat';
-  margin-top: 2rem;
   font-size: 1.3rem;
   padding-left: .5rem;
+
+  @media screen and (min-width:769px) {
+    width: 90%;
+
+    @media screen and (max-width:768px) {
+      width: 90%;
+    }
+  }
+
 }
 
 .login-page-btn {
@@ -140,8 +270,42 @@
   width: 8rem;
   height: 2.5rem;
   font-family: 'Montserrat';
-  z-index: 100;
   cursor: pointer;
   align-self: center;
   margin-bottom: 5rem;
+}
+
+.to-register-tag-p {
+  text-decoration: none;
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  /* 125% */
+}
+
+.p-tag-to-register {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.25rem;
+}
+
+.margin-input-login {
+  margin-bottom: 3.2rem;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+
+}
+
+
+.wrapper-extras-login {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import loginLogo from '../img/imgLogin/login-studystaylogo.png';
 import './LoginForm.css';
 import { useAuth } from '../../context/ContextProvider';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useAuth();
+  const { token, setToken, setUser } = useAuth(); // Get setUser from context
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -43,6 +43,8 @@ const LoginForm = () => {
         console.log('Token:', data.token);
         console.log(data)
         setToken(data.token);
+        setUser(data); // Set user data
+        localStorage.setItem('user', data);
         navigate('/');
       })
       .catch(error => {
@@ -58,24 +60,33 @@ const LoginForm = () => {
       </div>
       <div className='login-container'>
         <div className="login-container-form">
-          <div className="header-login-text">
+          <div className="header-login-text-login">
             <h1>Mina Sidor</h1>
-            <p>Här loggar du in på Mina Sidor om du är hyresgäst hos oss eller om du står i vår bostadskö. På Mina Sidor kan du enkelt hantera allt som rör ditt boende, se din köpoäng och uppdatera dina personliga uppgifter. Om du har några funderingar eller behöver assistans, tveka inte att kontakta vår kundservice. Välkommen att utforska alla de funktioner och tjänster som erbjuds för att göra ditt boende ännu bekvämare.</p>
+            <div className="p-container-login">
+              <p className='header-login-p'>Här loggar du in på Mina Sidor om du är hyresgäst hos oss eller om du står i vår bostadskö.</p>
+            </div>
           </div>
           <div className="loginLogo">
             <img src={loginLogo} alt="loginLogo" />
           </div>
-          <p>Vänligen fyll i fälten nedan</p>
+          <p className='login-text-please'>Vänligen fyll i fälten nedan</p>
           <div className="form-parent">
             <form className='form-login' onSubmit={handleSubmit}>
-              <div className="login-group">
-                <input className='login-input' name="email" type="email" placeholder='E-mail' value={credentials.email} onChange={handleChange} />
+              <div className="wrapper-for-login-group">
+                <div className="login-group">
+                  <input className='login-input margin-input-login' name="email" type="email" placeholder='E-mail' value={credentials.email} onChange={handleChange} />
+                </div>
+                <div className="login-group">
+                  <input className='login-input' name="password" type="password" placeholder='Lösenord' value={credentials.password} onChange={handleChange} />
+                  <p>Glömt lösenord?</p>
+                </div>
               </div>
-              <div className="login-group">
-                <input className='login-input' name="password" type="password" placeholder='Lösenord' value={credentials.password} onChange={handleChange} />
-                <p>Glömt lösenord?</p>
+              <div className="wrapper-extras-login">
+                <button className='login-page-btn' type="submit">Login</button>
+                <p className='p-tag-to-register'>Vill du registrera ett konto?</p>
+                <p><NavLink to='/registration' className='to-register-tag-p'>Klicka här</NavLink> för att registrera dig</p>
+
               </div>
-              <button className='login-page-btn' type="submit">Login</button>
             </form>
           </div>
         </div>

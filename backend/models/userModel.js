@@ -8,10 +8,20 @@ exports.registerUser = async (req, res) => {
   if (password !== repeatPassword) {
     res.status(400).json({
       message: 'Passwords do not match'
-    })
+    });
     return;
   }
+
   try {
+    // Check if email already exists
+    const existingUser = await User.findOne({ email: email });
+    if (existingUser) {
+      res.status(400).json({
+        message: 'Email already registered'
+      });
+      return;
+    }
+
     const salt = bcrypt.genSaltSync(10);
     const passwordHasher = bcrypt.hashSync(password, salt);
 
@@ -33,6 +43,7 @@ exports.registerUser = async (req, res) => {
     });
   }
 }
+
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -61,6 +72,8 @@ exports.loginUser = async (req, res) => {
       message: 'User logged in successfully',
       token: auth.createJwt(user),
       firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
       id: user._id
 
     });

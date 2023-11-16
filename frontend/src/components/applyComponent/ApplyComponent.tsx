@@ -19,7 +19,7 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
 
   const handleApplicationSubmit = () => {
     const applicationData = {
-      apartmentId: apartement._id,
+      apartementId: apartement._id,
     };
 
     fetch('http://localhost:9998/api/application/apply', {

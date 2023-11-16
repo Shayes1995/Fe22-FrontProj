@@ -1,17 +1,17 @@
-import React from 'react';
+import { useState } from 'react';
 import { DetailshouseProps } from '../../typescriptHelpers/apartements';
 import './Detailshouse.css'
-import Date from '../img/imgDetailshouse/Date.png'
-import Pin from '../img/imgDetailshouse/Pin.png'
-import Size from '../img/imgDetailshouse/Size.png'
-import Squaremeter from '../img/imgDetailshouse/Squaremeter.png'
-import bigApartement from '../img/imgDetailshouse/bigApartement.png';
-import unitRoomImg from '../img/imgDetailshouse/unitRoom.png';
-import unitCollectiveImg from '../img/imgDetailshouse/unitCollective.png';
-import unitHouseImg from '../img/imgDetailshouse/unitHouse.png';
 import StudyStayLogo from '../img/imgDetailshouse/descriptionLogo.png';
 import { AiOutlineWifi } from 'react-icons/ai';
-import { FaCar } from 'react-icons/fa';
+import { BiMap } from 'react-icons/bi';
+import { GrMoney } from 'react-icons/gr';
+import { IoBedOutline } from 'react-icons/io5';
+import { LuBox } from 'react-icons/lu';
+import { IoTodayOutline } from 'react-icons/io5';
+import { BsBuildings } from 'react-icons/bs';
+import { AiOutlineHome } from 'react-icons/ai';
+import { BsDoorOpen } from 'react-icons/bs';
+import { PiUsersThreeLight } from 'react-icons/pi';
 import { BiSolidWasher } from 'react-icons/bi';
 import { MdBalcony } from 'react-icons/md';
 import { PiElevatorLight } from 'react-icons/pi';
@@ -20,7 +20,7 @@ import { PiCookingPot } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
 
 const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
-
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   if (!apartement) return <div>Loading...</div>;
   const getImageUrl = (name: string) => {
     const imageObject = apartement.imgURL.find(img => img.name === name);
@@ -36,17 +36,22 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
   const getUnitTypeImage = (unitType: string) => {
     switch (unitType) {
       case 'unitApartement':
-        return bigApartement;
+        return <BsBuildings className='icon-logs-details' />;
       case 'unitRoom':
-        return unitRoomImg;
+        return <BsDoorOpen className='icon-logs-details' />;
       case 'unitCollective':
-        return unitCollectiveImg;
+        return <PiUsersThreeLight className='icon-logs-details' />;
       case 'unitHouse':
-        return unitHouseImg;
+        return <AiOutlineHome className='icon-logs-details' />;
       default:
-        return Date;
+        return unitType;
     }
   }
+
+  const UnitIcon = getUnitTypeImage(apartement.unitType);
+
+
+
 
   const getUnitTypeDisplayName = (unitType: string) => {
     switch (unitType) {
@@ -62,6 +67,7 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
         return unitType;
     }
   }
+
   const getUnitIncludeDisplay = (includes: string) => {
     switch (includes) {
       case 'Kitchen':
@@ -83,29 +89,43 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
   const getUnitIncludeImage = (includes: string) => {
     switch (includes) {
       case 'Kitchen':
-        return <PiCookingPot className='icon-logs' />;
+        return <PiCookingPot className='icon-logs-details' />;
       case 'Wifi':
-        return <AiOutlineWifi className='icon-logs' />;
+        return <AiOutlineWifi className='icon-logs-details' />;
       case 'Dishwasher':
-        return <BiSolidWasher className='icon-logs' />;
+        return <BiSolidWasher className='icon-logs-details' />;
       case 'Balcony':
-        return <MdBalcony className='icon-logs' />;
+        return <MdBalcony className='icon-logs-details' />;
       case 'Electricity':
-        return <FcElectricity className='icon-logs' />;
+        return <FcElectricity className='icon-logs-details' />;
       case 'Elevator':
-        return <PiElevatorLight className='icon-logs' />;
+        return <PiElevatorLight className='icon-logs-details' />;
       default:
         return includes;
     }
   }
 
 
-
+  const handleDotClick = (index: number) => {
+    setActiveImageIndex(index);
+  };
 
   return (
     <div className='details-container'>
       <div className='details-column'>
         <div className="details-row-one">
+          <div className="details-carousel">
+            {apartement.imgURL.map((img, index) => (
+              <div key={img.name} className={`carousel-slide ${index === activeImageIndex ? 'active' : ''}`}>
+                <img src={img.url} alt={img.name} />
+              </div>
+            ))}
+            <div className="carousel-dots">
+              {apartement.imgURL.map((_, index) => (
+                <span key={index} onClick={() => handleDotClick(index)} className={index === activeImageIndex ? 'active-dot' : ''}></span>
+              ))}
+            </div>
+          </div>
           <div className="details-img">
             <div className="leftside-img">
               <div className="image-box-one">
@@ -130,36 +150,37 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
 
             <div className="box-details">
               <div className="img-box">
-                <img className='details-icon' src={Pin} alt="" />
+                <BiMap className='icon-logs-details' />
               </div>
               <p>{apartement.street}</p>
             </div>
             <div className="box-details">
-
-              <h4>Hyra</h4>
+              <div className="img-box">
+                <GrMoney className='icon-logs-details' />
+              </div>
               <p>{apartement.rent}kr</p>
             </div>
             <div className="box-details">
               <div className="img-box">
-                <img className='details-icon' src={Size} alt="" />
+                <IoBedOutline className='icon-logs-details' />
               </div>
               <p>{apartement.rooms} RoK</p>
             </div>
             <div className="box-details">
               <div className="img-box">
-                <img className='details-icon' src={Squaremeter} alt="" />
+                <LuBox className='icon-logs-details' />
               </div>
               <p>{apartement.size}</p>
             </div>
             <div className="box-details">
               <div className="img-box">
-                <img className='details-icon' src={Date} alt="" />
+                <IoTodayOutline className='icon-logs-details' />
               </div>
               <p>{apartement.available}</p>
             </div>
             <div className="box-details">
               <div className="img-box">
-                <img className='details-icon' src={getUnitTypeImage(apartement.unitType)} alt={apartement.unitType} />
+                {UnitIcon}
               </div>
               <p>{getUnitTypeDisplayName(apartement.unitType)}</p>
 
@@ -202,6 +223,19 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
               <p>Här finns nu en ljus och välplanerad lägenhet i fastighet som stod klar för inflyttning i lutet av 2018. I nära anslutning till porten finns allmänna kommunikationer som tar dig till city på några minuter. Från Redbergsplatsen går även flera spårvagnar in till centrum eller vidare österut. För dig som hellre väljer cykel och inte är rädd för backar är cykelbanorna väl utbyggda. Härliga naturreservatet Delsjön ligger alldeles runt knuten med möjlighet till en mängd naturupplevelser i form av bad, kanotpaddling, friluftsliv eller ridning. </p>
             </div>
           </div>
+          <div className="wrap-container-include">
+            <div className="includes-apartement-two">
+              {apartement.includes.map((include, index) => (
+                <div className="include-item-two" key={index}>
+                  <div className="includes-box-two">
+                    {getUnitIncludeImage(include.name)}
+                    <p>{getUnitIncludeDisplay(include.name)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
           <div className="details-description-right">
             <div className="description-logo">
               <img className='logo-desc' src={StudyStayLogo} alt="logo" />
@@ -215,11 +249,15 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
                     <p className='info-p-one'>Våning:</p>
                     <p className='info-p-one'>Inflytt:</p>
                     <p className='info-p-one'>Ansök senast:</p>
+                    <p className='info-p-one'>Hyresvärd:</p>
+                    <p className='info-p-one'>Betyg:</p>
                   </div>
                   <div className="apartement-info-box">
                     <p className='info-p-two'>{apartement.area}</p>
                     <p className='info-p-two'>{apartement.floor}</p>
                     <p className='info-p-two'>{apartement.available}</p>
+                    <p className='info-p-two'>{apartement.apply}</p>
+                    <p className='info-p-two'>BRF Sparven</p>
                     <p className='info-p-two'>{apartement.apply}</p>
                   </div>
                 </div>

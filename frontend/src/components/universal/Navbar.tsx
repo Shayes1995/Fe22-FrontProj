@@ -1,7 +1,6 @@
-import React from 'react';
+
 import { NavLink } from 'react-router-dom';
 import logo from '../img/imgNavbar/navbarLogo.png';
-import House from '../img/imgNavbar/House.png';
 import ProfileBtn from '../img/imgNavbar/ProfileBtn.png';
 import './Navbar.css'
 import { useState } from 'react';
@@ -17,7 +16,7 @@ const Navbar = () => {
 
   const menuVariants = {
     open: { right: "0rem" },
-    closed: { right: "-40rem" }
+    closed: { right: "-55rem" }
   };
 
 
@@ -27,6 +26,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setToken(null);
+    localStorage.removeItem('token');
     console.log(token)
   };
 
@@ -57,52 +57,59 @@ const Navbar = () => {
           variants={menuVariants}
         >
           <ul className='hamburger-ul'>
-
             <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/">Bostäder</NavLink>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/">BOSTÄDER</NavLink>
             </li>
-            
             <span className='divider'></span>
             {token && (
               <>
                 <li className='hamburger-li'>
-                  <NavLink className='navlink-burger' onClick={toggleMenu} to="/mina-ansokningar">Mina ansökningar</NavLink>
+                  <NavLink className='navlink-burger' onClick={toggleMenu} to="/mina-ansokningar">MINA ANSÖKNINGAR</NavLink>
                 </li>
                 <span className='divider'></span>
               </>
             )}
-
-            {/* ... your other links ... */}
             <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/kontakt">Kontakt</NavLink>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/min-profil/:id">MIN PROFIL</NavLink>
             </li>
             <span className='divider'></span>
             <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/villkor">Villkor</NavLink>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/kontakt">KONTAKT</NavLink>
             </li>
             <span className='divider'></span>
             <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/hyr-ut">Hyr ut</NavLink>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/villkor">VILLKOR</NavLink>
+            </li>
+            <span className='divider'></span>
+            <li className='hamburger-li'>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/hyr-ut">HYR UT</NavLink>
             </li>
             <span className='divider'></span>
           </ul>
 
           {token ? (
-            <button className='logout-btn' onClick={handleLogout}>
-              LOGGA UT
-            </button>
+            <div className="btn-group-menu">
+              <button className='logout-btn' onClick={handleLogout}>
+                LOGGA UT
+              </button>
+            </div>
+
           ) : (
             <>
-              <button className='login-btn'>
-                <NavLink className='navlink-account' onClick={toggleMenu} to="/login">
-                  LOGGA IN
-                </NavLink>
-              </button>
-              <button className='login-btn'>
-                <NavLink className='navlink-account' onClick={toggleMenu} to="/registration">
-                  REGISTRERA DIG
-                </NavLink>
-              </button>
+              <div className="btn-group-menu">
+                <button className='login-btn'>
+                  <NavLink className='navlink-account' onClick={toggleMenu} to="/login">
+                    LOGGA IN
+                  </NavLink>
+
+                </button>
+                <button className='login-btn'>
+                  <NavLink className='navlink-account' onClick={toggleMenu} to="/registration">
+                    REGISTRERA DIG
+                  </NavLink>
+                </button>
+              </div>
+
             </>
           )}
         </motion.div>

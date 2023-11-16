@@ -3,8 +3,10 @@ import { Users } from '../../typescriptHelpers/users'
 import { useState } from 'react'
 import studystaylogo from '../img/imgRegister/studystaylogo.png'
 import './RegistrationForm.css'
+import { useNavigate, NavLink } from 'react-router-dom'
 
 const RegistrationForm: React.FC = () => {
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState<Users>({
     firstName: '',
     lastName: '',
@@ -29,14 +31,16 @@ const RegistrationForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(registerData) 
+        body: JSON.stringify(registerData)
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
+      const userData = await response.json();
+      console.log('User created:', userData);
+      navigate('/login')
 
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -54,29 +58,41 @@ const RegistrationForm: React.FC = () => {
       <div className='register-container'>
         <div className="register-container-form">
           <div className="header-register-text">
-            <h1>Mina Sidor</h1>
-            <p>Här loggar du in på Mina Sidor om du är hyresgäst hos oss eller om du står i vår bostadskö. På Mina Sidor kan du enkelt hantera allt som rör ditt boende, se din köpoäng och uppdatera dina personliga uppgifter. Om du har några funderingar eller behöver assistans, tveka inte att kontakta vår kundservice. Välkommen att utforska alla de funktioner och tjänster som erbjuds för att göra ditt boende ännu bekvämare.</p>
+            <h1>Gå med i vår bostadskö</h1>
+            <p>Välkommen till StudyStays bostadskö för lediga studentbostäder. Vår kö är kostnadsfri och du kan ställa dig i kön när du har fyllt 16 år och söka en bostad när du fyllt 18 år. Allt behöver göra är att registrera dig nedan.</p>
           </div>
           <div className="registerLogo">
             <img src={studystaylogo} alt="registerLogo" />
           </div>
-          <p>Vänligen fyll i fälten nedan</p>
           <div className="form-parent-register">
+            <div className="for-register-p-tag">
+              <p className='register-p-tag'>Registrera dig kostnadsfritt</p>
+
+            </div>
             <form onSubmit={handleSubmit} className='form-register' action="">
-              <div className="register-group">
-                <input className='register-input' name='firstName' type="text" placeholder='Förnamn' value={registerData.firstName} onChange={handleChange} />
-                <input className='register-input' name='lastName' type="text" placeholder='Efternamn' value={registerData.lastName} onChange={handleChange} />
-                <input className='register-input' name='email' type="email" placeholder='E-mejl' value={registerData.email} onChange={handleChange} />
-              </div>
-              <div className="register-group">
-                <input className='register-input' name='password' type="password" placeholder='Lösenord' value={registerData.password} onChange={handleChange} />
-                <input className='register-input' name='repeatPassword' type="password" placeholder='Verifiera lösenord' value={registerData.repeatPassword} onChange={handleChange} />
-                <div className="checkbox-group">
-                  <input type="checkbox" name="" id="" ></input>
-                  <p>Jag godkänner villkoren</p>
+              <div className="register-input-container">
+
+                <div className="register-group">
+                  <input className='register-input' name='firstName' type="text" placeholder='Förnamn' value={registerData.firstName} onChange={handleChange} />
+                  <input className='register-input' name='lastName' type="text" placeholder='Efternamn' value={registerData.lastName} onChange={handleChange} />
+                  <input className='register-input' name='email' type="email" placeholder='E-mejl' value={registerData.email} onChange={handleChange} />
+                </div>
+
+
+                <div className="register-group-second">
+                  <input className='register-input' name='password' type="password" placeholder='Lösenord' value={registerData.password} onChange={handleChange} />
+                  <input className='register-input' name='repeatPassword' type="password" placeholder='Verifiera lösenord' value={registerData.repeatPassword} onChange={handleChange} />
+                  <div className="checkbox-group">
+                    <input className='checkbox-register' type="checkbox" name="" id="" ></input>
+                    <p>Jag godkänner villkoren</p>
+                  </div>
                 </div>
               </div>
               <button className='register-page-btn'>Register</button>
+              <div className="wrapper-extras-login">
+                <p className='p-tag-to-register'>Har du redan ett konto?</p>
+                <p><NavLink to='/registration' className='to-register-tag-p'>Klicka här</NavLink> för att logga in</p>
+              </div>
             </form>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { Users } from "./users";
+
 export interface Apartement {
   _id: string;
   title: string;
@@ -36,3 +38,11 @@ export enum BuildingType {
 }
 
 export type QuickFilterType = BuildingType | null;
+
+export interface Application {
+  _id: string;
+  apartement: Apartement;
+  user: Users ;
+  status: string;
+  __v: number;
+}

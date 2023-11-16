@@ -49,7 +49,6 @@
     font-weight: 300;
     line-height: normal;
     color: black;
-
   }
 
   .footer-copywrite-links {
@@ -122,15 +121,19 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 5rem;
   }
 
   .footer-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
+    max-width: 66.5rem;
     flex-wrap: wrap;
     padding-bottom: 5rem;
+    max-height: 24rem;
+
 
   }
 
@@ -138,7 +141,6 @@
     margin-top: 4rem;
     display: flex;
     flex-direction: column;
-
 
   }
 
@@ -159,6 +161,18 @@
     padding-top: 1rem;
   }
 
+  .left-ul {
+    width: 15.875rem;
+  }
+
+  .middle-ul {
+    width: 12.75rem;
+  }
+
+  .right-ul {
+    width: 9.5rem;
+  }
+
   .navlink-footer {
     text-decoration: none;
     font-family: 'Montserrat';
@@ -170,6 +184,7 @@
 
   .footer-copywrite-links {
     width: 100%;
+    max-width: 69.5rem;
     border-top: 1px solid #cecccc;
     display: flex;
     flex-direction: row;
@@ -177,11 +192,13 @@
   }
 
   .left-copywrite {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 1rem;
+    padding: .5rem;
     font-family: 'Montserrat';
+
+
   }
 
   .copywrite-ul {
@@ -196,7 +213,8 @@
   }
 
   .copywrite-li {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
+
   }
 
   .copywrite-link {
@@ -209,18 +227,24 @@
     width: 20%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem 5rem;
+    justify-content: flex-end;
+    margin-right: 1rem;
   }
 
   .social-logo {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding-left: 2rem;
   }
 
   .logo-footer-img {
     height: 1.5rem;
     width: 1.5rem;
+  }
+
+  .right-align {
+    text-align: right;
   }
 }
