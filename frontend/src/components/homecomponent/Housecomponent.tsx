@@ -34,6 +34,7 @@ const Housecomponent = () => {
 
 
 
+  // useEffect to fetch all my apartments from my database
   useEffect(() => {
     setIsLoading(true);
     fetch('http://localhost:9998/api/apartement')
@@ -49,7 +50,6 @@ const Housecomponent = () => {
         setIsLoading(false);
       });
   }, []);
-
 
 
 

@@ -78,9 +78,11 @@ const RegistrationForm: React.FC = () => {
 
     if (newErrors.firstName && newErrors.lastName && newErrors.email && newErrors.password && newErrors.repeatPassword && newErrors.isCheckboxClicked) {
       console.log('form is not valid')
+      return;
     } else {
       console.log('form is valid')
     }
+
 
     try {
       const response = await fetch('http://localhost:9998/api/user/create', {
@@ -150,7 +152,7 @@ const RegistrationForm: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <button className='register-page-btn'>Register</button>
+              <button className='register-page-btn'>Registrera</button>
               {errors.firstName && <p className="error-message">*{errors.firstName}*</p>}
               {errors.lastName && <p className="error-message">*{errors.lastName}*</p>}
               {errors.email && <p className="error-message">*{errors.email}*</p>}

@@ -29,7 +29,7 @@ exports.applyForApartment = async (req, res) => {
     const existingApplication = await Application.findOne({ user: userId, apartement: apartementId });
     if (existingApplication) {
       res.status(400).json({
-        message: 'You have already applied for this apartment'
+        message: 'Du har redan ansökt till denna lägenhet'
       });
       return;
     }

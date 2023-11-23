@@ -370,6 +370,8 @@ h3 {
     flex-shrink: 0;
     width: 80%;
     max-width: 42rem;
+    margin-top: 8rem;
+
   }
 
 }

@@ -24,18 +24,28 @@
   align-items: center;
   justify-content: center;
   height: auto;
+  margin-top: 1rem;
 
-
+  @media screen and (max-width: 768px) {}
 
 }
+
+
+
+
 
 .details-img {
   display: flex;
   justify-content: center;
   flex: 1;
 
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 
 }
+
+
 
 .details-carousel {
   width: 100%;
@@ -114,6 +124,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: .1rem;
 
 }
 
@@ -137,7 +148,7 @@
 }
 
 .mid-img {
-  height: 49.7%;
+  height: 49%;
   align-content: center;
   justify-content: center;
 }
@@ -346,13 +357,18 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 21rem;
+  max-width: 21rem;
+  width: 100%;
 
   @media screen and (max-width:768px) {
     justify-content: flex-start;
 
     @media screen and (max-width:468px) {
       justify-content: space-between;
+
+      @media screen and (max-width:373px) {
+        justify-content: flex-start;
+      }
     }
   }
 
@@ -380,6 +396,10 @@
 
     @media screen and (max-width:468px) {
       font-size: 1rem;
+
+      @media screen and (max-width:373px) {
+        font-size: .8rem;
+      }
     }
 
   }
@@ -528,8 +548,8 @@
 
 .icon-logs-details {
 
-  width: 1.4375rem;
-  height: 1.5rem;
+  width: 1.625rem;
+  height: 1.8125rem;
   flex-shrink: 0;
 }
 

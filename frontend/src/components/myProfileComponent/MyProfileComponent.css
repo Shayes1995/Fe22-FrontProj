@@ -10,6 +10,10 @@
   width: 100%;
   max-width: 70.75rem;
 
+  @media screen and (max-width:768px) {
+    margin-top: 5.8125rem;
+  }
+
 }
 
 .my-profile-content h1 {

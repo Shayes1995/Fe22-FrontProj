@@ -7,7 +7,7 @@ import LoaderSpinner from '../loader/LoadSpinner';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { token, setToken, setUserInfo } = useAuth(); // Get setUser from context
+  const { token, setToken, setUserInfo } = useAuth(); 
   const [isLoading, setIsLoading] = useState(true)
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -161,7 +161,7 @@ const LoginForm = () => {
                 {errors.passwordUser && <p className="error-message">{errors.passwordUser}</p>}
                 {emailError && <p className="error-message">*{emailError}*</p>}
                 {passwordError && <p className="error-message">*{passwordError}*</p>}
-                <button className='login-page-btn' type="submit">Login</button>
+                <button className='login-page-btn' type="submit">Logga in</button>
                 <p className='p-tag-to-register'>Vill du registrera ett konto?</p>
                 <p><NavLink to='/registration' className='to-register-tag-p'>Klicka här</NavLink> för att registrera dig</p>
 

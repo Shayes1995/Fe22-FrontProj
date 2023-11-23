@@ -29,6 +29,10 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
   const [whatIncludes, setWhatIncludes] = useState<string[]>([]);
   const roomCounts = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
+  // below we have apartementTypes, leftAmenityTypes and rightAmenityTypes
+  // these are the types of apartements and amenities that i have in my database
+  // why we have these is because in my db the langue is in swedish and i want to show the user the options in english
+  //and because the computer cant read å-ä-ö i have to write them like this
   const apartmentTypes = [
     { type: "unitApartement", label: "Lägenhet" },
     { type: "unitHouse", label: "Hus" },
@@ -53,6 +57,7 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
     setMinPriceInput(Number(e.target.value));
   };
 
+  // handler for my price input maximum
   const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMaxPriceInput(Number(e.target.value));
   };
@@ -61,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
     setSearchAreaInput(e.target.value);
   };
 
-
+// handler for my room count
   const handleRoomCountClick = (roomCount: string | null) => {
     setAmountRooms(roomCount);
   };
@@ -70,20 +75,48 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
   // my submit handler for my form in the modal
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Selected Building Type:", apartementTypeBuilding);
 
-    const filteredResults = apartments.filter((apartment: Apartement) => {
-      const matchesType = apartementTypeBuilding ? apartment.unitType === apartementTypeBuilding : true;
-      const matchesRooms = amountRooms ? apartment.rooms === amountRooms : true;
-      const matchesIncludes = whatIncludes.length === 0 || whatIncludes.every(amenity =>
-        apartment.includes.some(include => include.name === amenity)
+    let filteredResults = apartments;
+
+    // doing if statements for all my filters so i can filter out the apartments
+    // when and if they are selected
+    if (apartementTypeBuilding) {
+      filteredResults = filteredResults.filter(apartment =>
+        apartment.unitType === apartementTypeBuilding
       );
-      const withinPriceRange = (minPriceInput === 0 || apartment.rent >= minPriceInput) &&
-        (maxPriceInput === 0 || apartment.rent <= maxPriceInput);
-      const matchesArea = searchAreaInput.trim().toLowerCase() === '' ||
-        apartment.area.toLowerCase().includes(searchAreaInput.trim().toLowerCase());
+    }
 
-      return matchesType && matchesRooms && matchesIncludes && withinPriceRange && matchesArea;
-    });
+    // checking if the amount of rooms is selected
+    if (amountRooms) {
+      filteredResults = filteredResults.filter(apartment =>
+        apartment.rooms === amountRooms
+      );
+    }
+
+    // checking if the min and max price has a value
+    if (minPriceInput !== '' && maxPriceInput !== '') {
+      filteredResults = filteredResults.filter(apartment =>
+        apartment.rent >= minPriceInput && apartment.rent <= maxPriceInput
+      );
+    }
+    // checking if the amenities are selected
+    if (whatIncludes.length > 0) {
+      filteredResults = filteredResults.filter(apartment =>
+        whatIncludes.every(amenity =>
+          apartment.includes.some(include => include.name === amenity)
+        )
+      );
+    }
+    // checking if the search area has a value
+    if (searchAreaInput) {
+      filteredResults = filteredResults.filter(apartment =>
+        apartment.area === searchAreaInput
+      );
+    }
+
+    console.log("Search Area Input:", searchAreaInput);
+    console.log("Filtered Results:", filteredResults);
 
     onFilterSubmit(filteredResults);
     setShowModal(false);
@@ -91,8 +124,9 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
 
 
 
-
+  // this handleChange is for my includes for when i click the modal checkboxes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // e.target.name is targeting the specific value of the checkbox
     const amenity = e.target.name;
     setWhatIncludes(prevIncludes => {
       if (e.target.checked) {
@@ -103,14 +137,17 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal, setSearchArea, f
     });
   };
 
+  // my resetFilter will reset all my filters and show all my apartments
   const resetFilters = () => {
-    setMinPriceInput(0);
-    setMaxPriceInput(0);
+    setMinPriceInput('');
+    setMaxPriceInput('');
     setApartementTypeBuilding(null);
     setAmountRooms(null);
     setWhatIncludes([]);
-    setSearchArea('');
-  }
+    setSearchAreaInput('');
+
+    onFilterSubmit(apartments);
+  };
 
 
 

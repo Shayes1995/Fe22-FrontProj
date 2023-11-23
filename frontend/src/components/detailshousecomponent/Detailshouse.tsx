@@ -26,6 +26,9 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [hasApplied, setHasApplied] = useState(false);
+  const paragraphs = apartement?.content?.split('\n\n') ?? [];
+
+
 
 
   useEffect(() => {
@@ -296,10 +299,9 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
             </div>
             <div className="description-p-tag">
               <p>{apartement.title}</p>
-              <p>Här finns nu en ljus och välplanerad lägenhet i fastighet som stod klar för inflyttning i lutet av 2018. I nära anslutning till porten finns allmänna kommunikationer som tar dig till city på några minuter. Från Redbergsplatsen går även flera spårvagnar in till centrum eller vidare österut. För dig som hellre väljer cykel och inte är rädd för backar är cykelbanorna väl utbyggda. Härliga naturreservatet Delsjön ligger alldeles runt knuten med möjlighet till en mängd naturupplevelser i form av bad, kanotpaddling, friluftsliv eller ridning. </p>
-              <p>Här finns nu en ljus och välplanerad lägenhet i fastighet som stod klar för inflyttning i lutet av 2018. I nära anslutning till porten finns allmänna kommunikationer som tar dig till city på några minuter. Från Redbergsplatsen går även flera spårvagnar in till centrum eller vidare österut. För dig som hellre väljer cykel och inte är rädd för backar är cykelbanorna väl utbyggda. Härliga naturreservatet Delsjön ligger alldeles runt knuten med möjlighet till en mängd naturupplevelser i form av bad, kanotpaddling, friluftsliv eller ridning. </p>
-              <p>Här finns nu en ljus och välplanerad lägenhet i fastighet som stod klar för inflyttning i lutet av 2018. I nära anslutning till porten finns allmänna kommunikationer som tar dig till city på några minuter. Från Redbergsplatsen går även flera spårvagnar in till centrum eller vidare österut. För dig som hellre väljer cykel och inte är rädd för backar är cykelbanorna väl utbyggda. Härliga naturreservatet Delsjön ligger alldeles runt knuten med möjlighet till en mängd naturupplevelser i form av bad, kanotpaddling, friluftsliv eller ridning. </p>
-              <p>Här finns nu en ljus och välplanerad lägenhet i fastighet som stod klar för inflyttning i lutet av 2018. I nära anslutning till porten finns allmänna kommunikationer som tar dig till city på några minuter. Från Redbergsplatsen går även flera spårvagnar in till centrum eller vidare österut. För dig som hellre väljer cykel och inte är rädd för backar är cykelbanorna väl utbyggda. Härliga naturreservatet Delsjön ligger alldeles runt knuten med möjlighet till en mängd naturupplevelser i form av bad, kanotpaddling, friluftsliv eller ridning. </p>
+              {paragraphs.map((paragraph, index) => (
+                <p key={index} className="paragraph">{paragraph}</p>
+              ))}
             </div>
           </div>
           <div className="wrap-container-include">

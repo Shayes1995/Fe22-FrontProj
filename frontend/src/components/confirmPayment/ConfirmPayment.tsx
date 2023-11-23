@@ -48,13 +48,15 @@ const ConfirmPayment = () => {
   const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const onlyLettersRegex = /^[a-zA-ZåäöÅÄÖ ]+$/;
     const numberRegex = /^[0-9]{16}$/;
     const cvcRegex = /^\d{3,4}$/;
     const expiryDateRegex = /^\d{4}$/;
 
     const newErrors = {
       cardName: !cardName ? "Vänligen fyll i namn på bankkortet" :
-        cardName.length < 3 ? "Namnet måste vara minst 3 tecken" : "",
+        cardName.length < 3 ? "Namnet måste vara minst 3 tecken" : 
+        !onlyLettersRegex.test(cardName) ? "Namnet får bara innehålla bokstäver" : "",
       cardNumber: !cardNumber ? "Vänligen fyll i kortnummer" :
         cardNumber.length < 16 ? "Kortnumret måste vara minst 16 tecken" :
           cardNumber.length > 16 ? "Kortnumret får inte vara mer än 16 tecken" :
@@ -150,22 +152,26 @@ const ConfirmPayment = () => {
         <form className='form-payment' action="" onSubmit={handlePayment}>
           <h4>Betalning</h4>
           <div className="input-group">
-            {errors.cardName && <p className="error-message">{errors.cardName}</p>}
+
             <input className='input-long-payment' type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder='Namn på bankkortet' />
-            {errors.cardNumber && <p className="error-message">{errors.cardNumber}</p>}
+
             <input type="text" className='input-long-payment' value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder='Kortnummer' />
           </div>
           <div className="input-group-row">
             <div className='for-group-row-left'>
               <input type="text" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder='Utgångsdatum' />
-              {errors.cardDate && <p className="error-message">{errors.cardDate}</p>}
+
             </div>
             <div className='for-group-row-right'>
               <input type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder='Säkerhetskod' />
-              {errors.cardCVC && <p className="error-message">{errors.cardCVC}</p>}
+
             </div>
           </div>
           <div className="payment-btn-container">
+            {errors.cardName && <p className="error-message">*{errors.cardName}*</p>}
+            {errors.cardNumber && <p className="error-message">*{errors.cardNumber}*</p>}
+            {errors.cardDate && <p className="error-message">*{errors.cardDate}*</p>}
+            {errors.cardCVC && <p className="error-message">*{errors.cardCVC}*</p>}
             <button className='pay-now-btn'>BETALA</button>
 
           </div>

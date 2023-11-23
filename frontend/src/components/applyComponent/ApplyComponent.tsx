@@ -11,6 +11,10 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [acceptTerms, setAcceptTerms] = useState(false)
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [checkboxError, setCheckboxError] = useState('');
+
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -71,6 +75,7 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
       })
       .catch(error => {
         console.error(error);
+        setErrorMessage(error.message);
       });
     console.log(token);
   };
@@ -181,6 +186,7 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
                 <p>Jag godkänner villkoren</p>
               </div>
               <button className='apply-btn-apartement' onClick={handleApplicationSubmit}>ANSÖK</button>
+              {errorMessage && <p className="error-message">*{errorMessage}*</p>}
             </div>
           </div>
         </div>

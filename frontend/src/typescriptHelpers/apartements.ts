@@ -20,6 +20,7 @@ export interface Apartement {
   street: string;
   zipcode: string;
   landLord: string;
+  content: string;
   grades: string;
   apply: string;
   includes: {

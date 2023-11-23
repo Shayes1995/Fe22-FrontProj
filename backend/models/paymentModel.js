@@ -18,6 +18,22 @@ exports.postPayment = async (req, res) => {
       });
     }
 
+    const existingPayment = await Payment.findOne({ user: userId });
+    if (existingPayment) {
+      return res.status(400).json({
+        message: 'User already has a payment'
+      });
+    }
+
+    // Check if the user is already a resident
+    const existingResident = await Resident.findOne({ user: userId });
+    if (existingResident) {
+      return res.status(400).json({
+        message: 'User is already a resident in an apartment'
+      });
+    }
+
+
     const checkPayment = await Payment.findOne({ application: applicationId });
     if (checkPayment) { // If payment already exists
       return res.status(400).json({
@@ -30,8 +46,8 @@ exports.postPayment = async (req, res) => {
     const application = await Application.findById(applicationId).populate('apartement');
     if (!application) {
       return res.status(404).json({
-         message: 'Application not found' 
-        });
+        message: 'Application not found'
+      });
     }
 
     // Create and save the new payment
