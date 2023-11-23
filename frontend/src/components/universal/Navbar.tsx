@@ -27,7 +27,13 @@ const Navbar = () => {
   const handleLogout = () => {
     setToken(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     console.log(token)
+  };
+
+  const handleLogoutAndToggleMenu = () => {
+    handleLogout();
+    toggleMenu();
   };
 
   return (
@@ -57,22 +63,25 @@ const Navbar = () => {
           variants={menuVariants}
         >
           <ul className='hamburger-ul'>
-            <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/">BOSTÄDER</NavLink>
-            </li>
-            <span className='divider'></span>
+
             {token && (
               <>
+                <li className='hamburger-li'>
+                  <NavLink className='navlink-burger' onClick={toggleMenu} to="/min-profil">MINA SIDOR</NavLink>
+                </li>
+                <span className='divider'></span>
                 <li className='hamburger-li'>
                   <NavLink className='navlink-burger' onClick={toggleMenu} to="/mina-ansokningar">MINA ANSÖKNINGAR</NavLink>
                 </li>
                 <span className='divider'></span>
+
               </>
             )}
             <li className='hamburger-li'>
-              <NavLink className='navlink-burger' onClick={toggleMenu} to="/min-profil/:id">MIN PROFIL</NavLink>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/">LEDIGA BOSTÄDER</NavLink>
             </li>
             <span className='divider'></span>
+      
             <li className='hamburger-li'>
               <NavLink className='navlink-burger' onClick={toggleMenu} to="/kontakt">KONTAKT</NavLink>
             </li>
@@ -85,11 +94,15 @@ const Navbar = () => {
               <NavLink className='navlink-burger' onClick={toggleMenu} to="/hyr-ut">HYR UT</NavLink>
             </li>
             <span className='divider'></span>
+            <li className='hamburger-li'>
+              <NavLink className='navlink-burger' onClick={toggleMenu} to="/om-oss">OM OSS</NavLink>
+            </li>
+            <span className='divider'></span>
           </ul>
 
           {token ? (
             <div className="btn-group-menu">
-              <button className='logout-btn' onClick={handleLogout}>
+              <button className='logout-btn' onClick={handleLogoutAndToggleMenu} >
                 LOGGA UT
               </button>
             </div>

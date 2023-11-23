@@ -1,0 +1,158 @@
+.confirm-apartement-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+
+}
+
+.confirmed-apartement-hero {
+  background-image: url('../img/imgConfirmed/Imgwrap.jpg');
+  height: 40.556vh;
+  max-height: 24.0625rem;
+  flex-shrink: 0;
+  width: 100%;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 4rem;
+
+  @media screen and (max-width: 768px) {
+    height: 16.075rem;
+
+    @media screen and (max-width: 568px) {
+      height: 11.8075rem;
+
+    }
+
+
+  }
+}
+
+.confirm-carousel-dots span {
+  margin: 1.5px;
+}
+
+.confirmed-content {
+  height: 30rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1rem;
+  margin-top: 3rem;
+  max-width: 75rem;
+}
+
+.left-confirmed {
+  width: 50%;
+  height: 100%;
+  max-width: 34.375rem;
+}
+
+.right-confirmed {
+  width: 50%;
+  height: 100%;
+
+  max-width: 34.375rem;
+
+}
+
+.right-confirmed h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+
+}
+
+.right-confirmed p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  max-width: 27.62738rem;
+  margin-top: 3rem;
+}
+
+.btn-container-confirmed {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.test-tag h2 {
+  border: 1px solid black;
+  color: black;
+}
+
+.btn-confirmed {
+  width: 10.375rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  background-color: #E78121;
+  border-radius: 1.875rem;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.20);
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+}
+
+.confirmed-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 34.375rem;
+  height: 21.07731rem;
+  overflow: hidden;
+
+}
+
+.confirmed-carousel-container img {
+  border-radius: 1rem;
+
+}
+
+.content-confirm h2 {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.section-confirm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 17.3125rem;
+}
+
+.section-confirm p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

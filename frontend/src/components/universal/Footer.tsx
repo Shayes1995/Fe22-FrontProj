@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom'
 import instagramLogo from '../img/imgFooter/insta.png'
 import linkedinLogo from '../img/imgFooter/linkedin.png'
 import facebookLogo from '../img/imgFooter/facebook.png'
+import { ImFacebook2 } from 'react-icons/im'
+import { BsInstagram } from 'react-icons/bs'
+import { BsLinkedin } from 'react-icons/bs'
 
 const Footer = () => {
   return (
@@ -70,41 +73,33 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+      <span className="border-divider"></span>
       <div className="footer-copywrite-links">
         <div className="left-copywrite">
-          <p>© 2023 StudyStay AB</p>
 
           <ul className='copywrite-ul'>
-            <p>·</p>
             <li className='copywrite-li'>
-              <NavLink className='copywrite-link' to='/'>Integritet</NavLink>
-            </li>
-            <p>·</p>
-            <li className='copywrite-li'>
-              <NavLink className='copywrite-link' to='/'>Villkor</NavLink>
-            </li>
-            <p>·</p>
-            <li className='copywrite-li'>
-              <NavLink className='copywrite-link' to='/'>Sajtkarta</NavLink>
-            </li>
-            <p>·</p>
-            <li className='copywrite-li'>
+              <NavLink className='copywrite-link' to='/'>© 2023 StudyStay AB</NavLink><span> · </span>
+              <NavLink className='copywrite-link' to='/'>Integritet</NavLink><span> · </span>
+              <NavLink className='copywrite-link' to='/'>Villkor</NavLink><span> · </span>
+              <NavLink className='copywrite-link' to='/'>Sajtkarta</NavLink><span> · </span>
               <NavLink className='copywrite-link' to='/'>Företagsuppgifter</NavLink>
             </li>
           </ul>
         </div>
         <div className="right-copywrite">
           <div className="social-logo">
-            <img className='logo-footer-img' src={facebookLogo} alt="" />
+            <ImFacebook2 className='logo-footer-img ImFacebook2' />
           </div>
           <div className="social-logo">
-            <img className='logo-footer-img' src={instagramLogo} alt="" /></div>
+            <BsInstagram className='logo-footer-img' />
+          </div>
           <div className="social-logo">
-            <img className='logo-footer-img' src={linkedinLogo} alt="" />
+            <BsLinkedin className='logo-footer-img' />
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }
 

@@ -1,0 +1,70 @@
+.about-us-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
+}
+
+.about-us-hero {
+  height: 35.556vh;
+  max-height: 24.0625rem;
+  width: 100%;
+  background-image: url('../img/imgAboutUs/AboutUs.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  object-fit: cover;
+
+  @media screen and (max-width: 768px) {
+    height: 16.075rem;
+
+    @media screen and (max-width: 568px) {
+      height: 11.8075rem;
+
+    }
+
+
+  }
+}
+
+.about-us-info {
+  padding: 1rem;
+  max-width: 65rem;
+}
+
+.about-us-info h1 {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 3.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.5625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: start;
+    margin: 0;
+    padding-bottom: 1rem;
+    margin-top: 2.5rem;
+
+  }
+}
+
+.about-us-info p {
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}

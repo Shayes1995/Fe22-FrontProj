@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   footer {
     background-color: #F8F8F8;
     display: flex;
@@ -56,7 +56,7 @@
     border-top: 1px solid #cecccc;
     display: flex;
     flex-direction: column-reverse;
-
+    padding-top: 1rem;
 
   }
 
@@ -66,6 +66,7 @@
     flex-direction: row;
     text-align: center;
     font-family: 'Montserrat';
+
   }
 
   .copywrite-ul {
@@ -73,14 +74,17 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     list-style-type: none;
-    padding: 0 1rem;
+    padding: 0 0 1rem 0;
     margin: 0;
+    width: 100%;
   }
 
   .copywrite-li {
-    padding: .5rem;
+    padding: 0;
     margin: 0;
+
 
   }
 
@@ -88,15 +92,28 @@
     text-decoration: none;
     color: black;
     font-family: 'Montserrat';
+    padding: 0 .5rem 0 .5rem;
+    margin: 0;
   }
 
   .right-copywrite {
-    width: 100%;
+
+    width: 10rem;
+    align-self: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding-top: 1.5rem;
+    justify-content: space-between;
+    padding-top: 1rem;
     padding-bottom: 1rem;
+
+  }
+
+  .logo-footer-img {
+
+
+    width: 1.59525rem;
+    height: 1.5625rem;
+    flex-shrink: 0;
 
 
   }
@@ -105,13 +122,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 0;
+    margin: 0;
   }
 
-  .logo-footer-img {
-    height: 1.5rem;
-    width: 1.5rem;
+  .border-divider {
+    width: 100%;
+    height: .0625rem;
+    width: 100%;
+    border: none;
+    margin: 0;
+  }
+
+  .social-logo .ImFacebook2 {
+    border-radius: 50%;
+
   }
 }
+
+
+
+
 
 @media screen and (min-width: 768px) {
   footer {
@@ -185,10 +217,11 @@
   .footer-copywrite-links {
     width: 100%;
     max-width: 69.5rem;
-    border-top: 1px solid #cecccc;
+    /* border-top: 1px solid #cecccc; */
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-bottom: 1rem;
   }
 
   .left-copywrite {
@@ -246,5 +279,11 @@
 
   .right-align {
     text-align: right;
+  }
+
+  .border-divider {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: .5rem;
   }
 }

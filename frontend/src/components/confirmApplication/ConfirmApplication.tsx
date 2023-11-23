@@ -4,27 +4,45 @@ import { useAuth } from '../../context/ContextProvider';
 import './ConfirmApplication.css'
 import { Application, Apartement } from '../../typescriptHelpers/apartements';
 import { useNavigate } from 'react-router-dom';
+import LoaderSpinner from '../loader/LoadSpinner';
 
 const ConfirmApplication: React.FC = () => {
-  const { application, fetchApplication, user } = useAuth();
-  const { id } = useParams<{ id: string }>(); // this will get 'id' 
+  const { application, fetchApplication, user, userInfo } = useAuth();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  const [isLoading, setIsLoading] = useState(true)
+
+
+
   useEffect(() => {
+    setIsLoading(true);
     if (id && !application) {
       fetchApplication(id);
     }
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, [id, application, fetchApplication]);
+
+
+
 
   const handleDotClick = (index: any) => {
     setActiveImageIndex(index);
   };
 
+  if (isLoading) {
+    return <LoaderSpinner />;
+  }
+
   return (
     <div className='confirm-application-container'>
       <div className="confirm-application">
-        <h1>Grattis {user?.firstName}!</h1>
+        <h1>Grattis {userInfo?.firstName}!</h1>
         <p>Din ansökan har blivit godkänd! Kontrollera informationen nedan noggrant innan du tackar ja till bostaden. Det är viktigt att all information stämmer och att du känner till alla villkor och krav innan du fortsätter.</p>
       </div>
       <div className="container-for-specific-application">
@@ -46,7 +64,7 @@ const ConfirmApplication: React.FC = () => {
                 ))}
               </div>
               <p>{application.apartement.street}, {application.apartement.zipcode}</p>
-              <p>Hyresvärd: BRF Lingon</p>
+              <p>Hyresvärd: {application.apartement.landLord}</p>
             </div>
           )}
 

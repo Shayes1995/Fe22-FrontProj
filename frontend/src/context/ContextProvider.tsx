@@ -1,16 +1,17 @@
-// ContextProvider.tsx
 import React, { useState, createContext, useContext, ReactNode, useEffect, useCallback } from 'react';
 import { Apartement, Application } from '../typescriptHelpers/apartements'
-import { Users } from '../typescriptHelpers/users'
+import { Users, LoggedInUser } from '../typescriptHelpers/users'
 
 
 interface AuthContextProps {
   token: string | null;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
   application: Application | null;
-  user?: Users | null;
+  user: Users | null;
+  userInfo: LoggedInUser | null;
   setApplication: React.Dispatch<React.SetStateAction<Application | null>>;
   setUser: React.Dispatch<React.SetStateAction<Users | null>>;
+  setUserInfo: React.Dispatch<React.SetStateAction<LoggedInUser | null>>;
   fetchApplication: (id: string) => void;
 }
 
@@ -31,15 +32,21 @@ interface ContextProviderProps {
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(() => {
-    // Initialize token from localStorage or default to null
+
     return localStorage.getItem('token') || null;
   });
 
   const [application, setApplication] = useState<Application | null>(null);
-  const [user, setUser] = useState<Users | null>(null); // Define user with useState here at the top level
+  const [user, setUser] = useState<Users | null>(null); 
+  const [userInfo, setUserInfo] = useState<LoggedInUser | null>(() => {
+    const storedUserInfo = localStorage.getItem('user');
+    return storedUserInfo ? JSON.parse(storedUserInfo) : null;
+  });
+
+
+
 
   useEffect(() => {
-    // Use useEffect to update localStorage whenever the token changes
     if (token) {
       localStorage.setItem('token', token);
     } else {
@@ -48,7 +55,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   }, [token]);
 
   const fetchApplication = useCallback((id: string) => {
-    // Now you should not use useState here. This block is only for fetching.
     if (token) {
       fetch(`http://localhost:9998/api/application/all-applications/${id}`, {
         method: 'GET',
@@ -64,24 +70,23 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
           return response.json();
         })
         .then(data => {
-          setApplication(data.application); // Assuming data.application is the application data
-          console.log(data.application); // Logging the application data
-          // Presumably, you want to set user data here as well
+          setApplication(data.application);
+          console.log(data.application); // logging the application data
           if (data.application && data.application.user) {
-            setUser(data.application.user); // Set user data
+            setUser(data.application.user); // setting user data
           }
         })
         .catch(error => {
           console.error('Error fetching application:', error);
         });
     }
-  }, [token]); // You might want to add setUser to your dependency array if you use it inside the callback
+  }, [token, setUser, setUserInfo]);
 
-  // Passing down fetchApplication, application, and user through context
   return (
-    <AuthContext.Provider value={{ user, token, setToken, application, setApplication, fetchApplication, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, userInfo, setUserInfo, token, setToken, application, setApplication, fetchApplication }}>
       {children}
     </AuthContext.Provider>
+
   );
 }
 

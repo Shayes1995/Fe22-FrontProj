@@ -1,17 +1,17 @@
 const Apartement = require('../schemas/apartementSchema');
 
 exports.addApartement = (req, res) => {
-  const { title, available, description, imgURL, period, unitType, area, floor, rent, rooms, size, city, street, zipcode, apply, includes, status = true } = req.body;
+  const { title, available, description, imgURL, period, unitType, area, floor, rent, rooms, size, city, street, zipcode, apply, includes, landLord, grades, content, status = true } = req.body;
 
 
-  if (!title || !available || !description || !(imgURL && imgURL.length) || !period || !unitType || !area || !floor || !rent || !rooms || !size || !city || !street || !zipcode || !apply || !(includes && includes.length) || !status) {
+  if (!title || !available || !description || !(imgURL && imgURL.length) || !period || !content || !unitType || !area || !floor || !rent || !rooms || !size || !city || !street || !zipcode || !landLord || !grades || !apply || !(includes && includes.length) || !status) {
     res.status(400).json({
       message: 'Please fill in all the required fields'
     })
     return;
   }
 
-  Apartement.create({ title, available, description, imgURL, period, unitType, area, floor, rent, rooms, size, city, street, zipcode, apply, includes, status })
+  Apartement.create({ title, available, description, imgURL, period, unitType, area, floor, rent, rooms, size, city, street, zipcode, landLord, apply, grades, includes, content, status })
     .then(() => {
       res.status(201).json({
         message: 'Apartement created successfully'
@@ -40,7 +40,7 @@ exports.getApartements = (req, res) => {
 }
 
 exports.getApartementById = (req, res) => {
-  const apartementId = req.params.id; 
+  const apartementId = req.params.id;
 
   Apartement.findById(apartementId)
     .then(apartement => {

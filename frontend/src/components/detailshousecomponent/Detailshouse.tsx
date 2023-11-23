@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DetailshouseProps } from '../../typescriptHelpers/apartements';
 import './Detailshouse.css'
 import StudyStayLogo from '../img/imgDetailshouse/descriptionLogo.png';
+import StarGrade from '../img/imgDetailshouse/StarGrades.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BiMap } from 'react-icons/bi';
 import { GrMoney } from 'react-icons/gr';
@@ -18,14 +19,46 @@ import { PiElevatorLight } from 'react-icons/pi';
 import { FcElectricity } from 'react-icons/fc';
 import { PiCookingPot } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
+import LoaderSpinner from '../loader/LoadSpinner';
+import NotFound from '../../pages/NotFound';
 
 const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  if (!apartement) return <div>Loading...</div>;
+  const [hasApplied, setHasApplied] = useState(false);
+
+
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [apartement]);
+
+
+
+  if (isLoading) {
+    return <LoaderSpinner />;
+  }
+
+  if (!apartement || !apartement.imgURL || !apartement.includes) {
+    return <div>
+      <NotFound />
+    </div>;
+  }
+
+
+
   const getImageUrl = (name: string) => {
+    if (!apartement || !apartement.imgURL) {
+      return '';
+    }
     const imageObject = apartement.imgURL.find(img => img.name === name);
     return imageObject ? imageObject.url : '';
   }
+
+
 
   const imgOneUrl = getImageUrl('imgOne');
   const imgTwoUrl = getImageUrl('imgTwo');
@@ -104,6 +137,52 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
         return includes;
     }
   }
+
+  const showGrades = () => {
+    switch (apartement.grades) {
+      case '1':
+        return <span><img key={1} src={StarGrade} alt="Star" /></span>;
+      case '2':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img key={2} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '3':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '4':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+            <img className='starLog' key={4} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '5':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+            <img className='starLog' key={4} src={StarGrade} alt="Star" />
+            <img className='starLog' key={5} src={StarGrade} alt="Star" />
+          </span>
+        );
+      default:
+        return <span></span>;
+    }
+  }
+
+
+
 
 
   const handleDotClick = (index: number) => {
@@ -257,8 +336,8 @@ const Detailshouse: React.FC<DetailshouseProps> = ({ apartement }) => {
                     <p className='info-p-two'>{apartement.floor}</p>
                     <p className='info-p-two'>{apartement.available}</p>
                     <p className='info-p-two'>{apartement.apply}</p>
-                    <p className='info-p-two'>BRF Sparven</p>
-                    <p className='info-p-two'>{apartement.apply}</p>
+                    <p className='info-p-two'>{apartement.landLord}</p>
+                    <p className='info-p-two'>{showGrades()}</p>
                   </div>
                 </div>
                 <p className='apply-p'>Ansökan är öppen och görs via vår bostadskö.</p>

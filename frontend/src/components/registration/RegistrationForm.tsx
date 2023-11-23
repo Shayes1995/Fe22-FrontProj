@@ -1,12 +1,39 @@
 import React from 'react'
 import { Users } from '../../typescriptHelpers/users'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import studystaylogo from '../img/imgRegister/studystaylogo.png'
 import './RegistrationForm.css'
 import { useNavigate, NavLink } from 'react-router-dom'
+import LoadSpinner from '../loader/LoadSpinner'
 
 const RegistrationForm: React.FC = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [repeatPassword, setRepeatPassword] = useState('')
+  const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
+    isCheckboxClicked: ''
+  })
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const [registerData, setRegisterData] = useState<Users>({
     firstName: '',
     lastName: '',
@@ -14,6 +41,11 @@ const RegistrationForm: React.FC = () => {
     password: '',
     repeatPassword: '',
   });
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckboxClicked(e.target.checked);
+  };
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterData({
@@ -25,6 +57,31 @@ const RegistrationForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const noNumberRegex = /^[a-zA-Z]+$/;
+
+    const newErrors = {
+      firstName: !firstName ? 'Vänligen fyll i ditt förnamn' :
+        firstName.length < 2 ? 'Förnamnet måste vara minst 2 tecken' :
+          !noNumberRegex.test(firstName) ? 'Förnamnet får inte innehålla siffror' : '',
+      lastName: !lastName ? 'Vänligen fyll i ditt efternamn' :
+        lastName.length < 3 ? 'Efternamnet måste vara minst 2 tecken' :
+          !noNumberRegex.test(lastName) ? 'Efternamnet får inte innehålla siffror' : '',
+      email: !email ? 'Vänligen fyll i din email' :
+        !email.includes('@') ? 'Vänligen fyll i en giltig email' : '',
+      password: !password ? 'Vänligen fyll i ett lösenord' :
+        password.length < 6 ? 'Lösenordet måste vara minst 6 tecken' : '',
+      repeatPassword: !repeatPassword ? 'Vänligen fyll i ditt lösenord igen' :
+        repeatPassword !== password ? 'Lösenorden matchar inte' : '',
+      isCheckboxClicked: !isCheckboxClicked ? 'Du måste godkänna villkoren' : ''
+    }
+    setErrors(newErrors);
+
+    if (newErrors.firstName && newErrors.lastName && newErrors.email && newErrors.password && newErrors.repeatPassword && newErrors.isCheckboxClicked) {
+      console.log('form is not valid')
+    } else {
+      console.log('form is valid')
+    }
+
     try {
       const response = await fetch('http://localhost:9998/api/user/create', {
         method: 'POST',
@@ -35,7 +92,8 @@ const RegistrationForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        console.log(response)
+        throw new Error(`Status: ${response.status}`);
       }
 
       const userData = await response.json();
@@ -46,6 +104,10 @@ const RegistrationForm: React.FC = () => {
       console.error('Error during fetch:', error);
 
     }
+  }
+
+  if (isLoading) {
+    return <LoadSpinner />
   }
 
 
@@ -83,12 +145,18 @@ const RegistrationForm: React.FC = () => {
                   <input className='register-input' name='password' type="password" placeholder='Lösenord' value={registerData.password} onChange={handleChange} />
                   <input className='register-input' name='repeatPassword' type="password" placeholder='Verifiera lösenord' value={registerData.repeatPassword} onChange={handleChange} />
                   <div className="checkbox-group">
-                    <input className='checkbox-register' type="checkbox" name="" id="" ></input>
+                    <input className='checkbox-register' type="checkbox" name="" id="" onChange={handleCheckboxChange} ></input>
                     <p>Jag godkänner villkoren</p>
                   </div>
                 </div>
               </div>
               <button className='register-page-btn'>Register</button>
+              {errors.firstName && <p className="error-message">*{errors.firstName}*</p>}
+              {errors.lastName && <p className="error-message">*{errors.lastName}*</p>}
+              {errors.email && <p className="error-message">*{errors.email}*</p>}
+              {errors.password && <p className="error-message">*{errors.password}*</p>}
+              {errors.repeatPassword && <p className="error-message">*{errors.repeatPassword}*</p>}
+              {errors.isCheckboxClicked && <p className="error-message">*{errors.isCheckboxClicked}*</p>}
               <div className="wrapper-extras-login">
                 <p className='p-tag-to-register'>Har du redan ett konto?</p>
                 <p><NavLink to='/registration' className='to-register-tag-p'>Klicka här</NavLink> för att logga in</p>

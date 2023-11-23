@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Housedetails from './pages/Housedetails'
 import Login from './pages/Login'
@@ -12,6 +12,9 @@ import UserApplications from './pages/UserApplications'
 import Confirm from './pages/Confirm'
 import Payment from './pages/Payment'
 import MyProfile from './pages/MyProfile'
+import AboutUs from './pages/AboutUs'
+import Confirmed from './pages/Confirmed'
+import NotFound from './pages/NotFound'
 
 const App = () => {
 
@@ -65,11 +68,26 @@ const App = () => {
             </ProtectedRoute>
         },
         {
-          path: '/min-profil/:id',
+          path: '/min-profil',
           element:
             <ProtectedRoute>
               <MyProfile />
             </ProtectedRoute>
+        },
+        {
+          path: '/my-apartement',
+          element:
+            <ProtectedRoute>
+              <Confirmed />
+            </ProtectedRoute>
+        },
+        {
+          path: '/om-oss',
+          element: <AboutUs />
+        },
+        {
+          path: '*', 
+          element: <NotFound />
         }
       ]
     }

@@ -5,3 +5,11 @@ export interface Users {
   password: string;
   repeatPassword: string;
 }
+
+export interface LoggedInUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  id: string;
+  createdDate: number;
+}

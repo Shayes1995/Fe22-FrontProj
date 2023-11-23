@@ -1,6 +1,6 @@
 .div-main-container-register {
   padding: 0;
-  margin-top: 4.2rem;
+  margin-top: 4rem;
 }
 
 .register-container {
@@ -19,7 +19,8 @@
 }
 
 .register-hero {
-  height: 35.556vh;
+  height: 40.556vh;
+  max-height: 24.0625rem;
   width: 100%;
   background-image: url('../img/imgRegister/registerimage.jpg');
   background-size: cover;
@@ -31,7 +32,13 @@
   object-fit: cover;
 
   @media screen and (max-width: 768px) {
-    height: 16.475rem;
+    height: 16.075rem;
+
+    @media screen and (max-width: 568px) {
+      height: 11.8075rem;
+
+    }
+
 
   }
 

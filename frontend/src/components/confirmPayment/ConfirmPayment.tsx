@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './ConfirmPayment.css'
 import logoPayment from '../img/imgPayment/logo-payment.png';
 import { useAuth } from '../../context/ContextProvider';
+import { useNavigate } from 'react-router-dom';
+import LoaderSpinner from '../loader/LoadSpinner';
 
 const ConfirmPayment = () => {
+  const navigate = useNavigate();
   const { token, application } = useAuth();
   const [cardName, setCardName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvc, setCvc] = useState('');
-
+  const [isLoading, setIsLoading] = useState(true)
   const [errors, setErrors] = useState({
     cardName: "",
     cardNumber: "",
@@ -18,8 +21,25 @@ const ConfirmPayment = () => {
   });
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
 
-  const rentAmount = parseInt(application?.apartement.rent || '0', 10);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoaderSpinner />;
+  }
+
+
+
+
+
+
+
+  const rentAmount = application?.apartement.rent || 0;
   const deposition = 5000;
   const total = rentAmount + deposition;
 
@@ -31,29 +51,35 @@ const ConfirmPayment = () => {
     const numberRegex = /^[0-9]{16}$/;
     const cvcRegex = /^\d{3,4}$/;
     const expiryDateRegex = /^\d{4}$/;
-    
+
     const newErrors = {
       cardName: !cardName ? "Vänligen fyll i namn på bankkortet" :
         cardName.length < 3 ? "Namnet måste vara minst 3 tecken" : "",
       cardNumber: !cardNumber ? "Vänligen fyll i kortnummer" :
         cardNumber.length < 16 ? "Kortnumret måste vara minst 16 tecken" :
           cardNumber.length > 16 ? "Kortnumret får inte vara mer än 16 tecken" :
-          !numberRegex.test(cardNumber) ? "Kortnumret får bara innehålla siffror"
-            : "",
-      cardDate: !expiryDate ? "Vänligen fyll i utgångsdatum" : 
+            !numberRegex.test(cardNumber) ? "Kortnumret får bara innehålla siffror"
+              : "",
+      cardDate: !expiryDate ? "Vänligen fyll i utgångsdatum" :
         expiryDate.length < 4 ? "Utgångsdatumet måste vara minst 4 tecken" :
-        expiryDate.length > 4 ? "Utgångsdatumet får inte vara mer än 4 tecken" :
-        !expiryDateRegex.test(expiryDate) ? "Utgångsdatumet får bara innehålla siffror" : "",
-      cardCVC: !cvc ? "Vänligen fyll i säkerhetskod" : 
+          expiryDate.length > 4 ? "Utgångsdatumet får inte vara mer än 4 tecken" :
+            !expiryDateRegex.test(expiryDate) ? "Utgångsdatumet får bara innehålla siffror" : "",
+      cardCVC: !cvc ? "Vänligen fyll i säkerhetskod" :
         cvc.length < 3 ? "Säkerhetskoden måste vara minst 3 tecken" :
-        cvc.length > 3 ? "Säkerhetskoden får inte vara mer än 3 tecken" :
-        !cvcRegex.test(cvc) ? "Säkerhetskoden får bara innehålla siffror" : "",
+          cvc.length > 3 ? "Säkerhetskoden får inte vara mer än 3 tecken" :
+            !cvcRegex.test(cvc) ? "Säkerhetskoden får bara innehålla siffror" : "",
     };
     setErrors(newErrors);
 
     if (!cardName || !cardNumber || !expiryDate || !cvc) {
       console.log('must fill in all fields');
       return;
+    } else if (newErrors.cardName || newErrors.cardNumber || newErrors.cardDate || newErrors.cardCVC) {
+      console.log('error in form');
+      return;
+    } else {
+      console.log('payment success');
+
     }
 
     const applicationId = application?._id;
@@ -81,6 +107,7 @@ const ConfirmPayment = () => {
       const data = await response.json();
       if (response.ok) {
         console.log("Payment success:", data);
+        navigate('/my-apartement', { state: { apartment: application?.apartement } });
       } else {
         throw new Error(data.message || 'Payment failed');
       }
@@ -88,6 +115,7 @@ const ConfirmPayment = () => {
       console.error('Payment error:', error);
     }
   };
+
 
 
   return (
@@ -108,14 +136,14 @@ const ConfirmPayment = () => {
           </div>
           <div className="bottom-to-pay">
             <div className="left-to-pay">
-              <p className='bottom-to-pay-p '>Hyra:</p>
-              <p className='bottom-to-pay-p '>Deposition:</p>
-              <p className='to-pay-bold'>Totalt:</p>
+              <p className='bottom-to-pay-p align-left-pay '>Hyra:</p>
+              <p className='bottom-to-pay-p align-left-pay'>Deposition:</p>
+              <p className='to-pay-bold align-left-pay'>Totalt:</p>
             </div>
             <div className="right-to-pay">
-              <p className='bottom-to-pay-p '> {rentAmount} kr</p>
-              <p className='bottom-to-pay-p '>5000 kr</p>
-              <p className='to-pay-bold'>{total} kr</p>
+              <p className='bottom-to-pay-p align-right-pay '> {rentAmount} kr</p>
+              <p className='bottom-to-pay-p align-right-pay'>5000 kr</p>
+              <p className='to-pay-bold align-right-pay'>{total} kr</p>
             </div>
           </div>
         </div>
@@ -123,16 +151,16 @@ const ConfirmPayment = () => {
           <h4>Betalning</h4>
           <div className="input-group">
             {errors.cardName && <p className="error-message">{errors.cardName}</p>}
-            <input type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder='Namn på bankkortet' />
+            <input className='input-long-payment' type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} placeholder='Namn på bankkortet' />
             {errors.cardNumber && <p className="error-message">{errors.cardNumber}</p>}
-            <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder='Kortnummer' />
+            <input type="text" className='input-long-payment' value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder='Kortnummer' />
           </div>
           <div className="input-group-row">
-            <div className="">
+            <div className='for-group-row-left'>
               <input type="text" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder='Utgångsdatum' />
               {errors.cardDate && <p className="error-message">{errors.cardDate}</p>}
             </div>
-            <div className="">
+            <div className='for-group-row-right'>
               <input type="text" value={cvc} onChange={(e) => setCvc(e.target.value)} placeholder='Säkerhetskod' />
               {errors.cardCVC && <p className="error-message">{errors.cardCVC}</p>}
             </div>

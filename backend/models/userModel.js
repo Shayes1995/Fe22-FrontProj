@@ -65,15 +65,13 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-
-
     res.status(200).json({
-
       message: 'User logged in successfully',
       token: auth.createJwt(user),
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      createdDate: user.createdDate,
       id: user._id
 
     });

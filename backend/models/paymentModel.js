@@ -2,54 +2,102 @@ const Payment = require('../schemas/paymentSchema');
 const Application = require('../schemas/applyapartementSchema');
 const User = require('../schemas/userSchema');
 const Apartement = require('../schemas/apartementSchema');
+const Resident = require('../schemas/residentSchema');
 
 
-// POST model for my payment 
 exports.postPayment = async (req, res) => {
   const userId = req.userData.id;
-  const { applicationId, amount,} = req.body;
-
-  // check to see if the user exists
-  const user = await User.findById(userId);
-  if (!user) {
-    return res.status(404).json({ message: 'User was not found' });
-  }
-
-  // cheeck if the application exists for this user
-  const application = await Application.findOne({ _id: applicationId, user: userId });
-  if (!application) {
-    return res.status(404).json({ message: 'This application is not yours' });
-  }
-
-  // checking if a there is a payment for this application
-  const existingPayment = await Payment.findOne({ application: applicationId });
-  if (existingPayment) {
-    return res.status(400).json({ message: 'A payment is already payed' });
-  }
+  const { applicationId, amount } = req.body;
 
   try {
-    // creating new payment
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found'
+      });
+    }
+
+    const checkPayment = await Payment.findOne({ application: applicationId });
+    if (checkPayment) { // If payment already exists
+      return res.status(400).json({
+        message: 'Payment already exists'
+      });
+
+    }
+
+    // Check if the application exists and retrieve the associated apartment
+    const application = await Application.findById(applicationId).populate('apartement');
+    if (!application) {
+      return res.status(404).json({
+         message: 'Application not found' 
+        });
+    }
+
+    // Create and save the new payment
     const newPayment = new Payment({
-      user: userId,
       application: applicationId,
-      amount: amount,
+      user: userId,
+      apartement: application.apartement, // Retrieve apartment ID from the application
+      amount: amount
     });
 
     await newPayment.save();
 
-    // deleting all applications for this user
-    await Application.deleteMany({ user: userId });
+    // create new collection for resident
+    const newResident = new Resident({
+      user: userId,
+      apartement: application.apartement._id,
+      payment: newPayment._id
+    });
+
+    await newResident.save();
+
+
+    Application.deleteMany({ user: userId });
 
     res.status(201).json({
-      message: 'Payment payed successfully',
-      paymentId: newPayment._id
+      message: 'Payment created successfully',
+      paymentId: newPayment._id,
+      residentId: newResident._id
     });
 
   } catch (err) {
     res.status(500).json({
-      message: 'Something went wrong',
+      message: 'Failed to create payment',
       error: err.message
     });
   }
 };
+
+
+
+// GET model for fetching payment by ID for a specific user with apartment details
+
+exports.getResident = async (req, res) => {
+  const userId = req.userData.id; // Extracted from the token
+
+  try {
+    const residents = await Resident.find({ user: userId })
+      .populate('user')
+      .populate('apartement')
+      .populate('payment');
+
+    if (!residents.length) {
+      return res.status(404).json({ message: 'No resident found for this user' });
+    }
+
+    res.status(200).json({
+      message: 'Resident retrieved successfully',
+      residents: residents
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to retrieve resident',
+      error: err.message
+    });
+  }
+};
+
 

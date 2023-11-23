@@ -1,10 +1,28 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import './ApplyComponent.css'
 import { DetailshouseProps } from '../../typescriptHelpers/apartements'
 import { useAuth } from '../../context/ContextProvider'
+import LoaderSpinner from '../loader/LoadSpinner'
+import StarGrade from '../img/imgDetailshouse/StarGrades.png';
+import { useNavigate } from 'react-router'
 
 const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
   const { token } = useAuth();
+  const [isLoading, setIsLoading] = useState(true)
+  const [acceptTerms, setAcceptTerms] = useState(false)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [apartement]);
+
+  if (isLoading) {
+    return <LoaderSpinner />;
+  }
+
   if (!apartement) {
     return null;
   }
@@ -14,10 +32,19 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
     return imageObject ? imageObject.url : '';
   }
 
+  const handleTerms = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAcceptTerms(e.target.checked);
+  };
+
 
   const imgOneUrl = getImageUrl('imgOne');
 
   const handleApplicationSubmit = () => {
+
+    if (!acceptTerms) {
+      console.log('Terms not accepted');
+      return;
+    }
     const applicationData = {
       apartementId: apartement._id,
     };
@@ -40,12 +67,56 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
       })
       .then(data => {
         console.log(data);
+        navigate('/mina-ansokningar');
       })
       .catch(error => {
         console.error(error);
       });
     console.log(token);
   };
+
+  const showGrades = () => {
+    switch (apartement.grades) {
+      case '1':
+        return <div><img key={1} src={StarGrade} alt="Star" /></div>;
+      case '2':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img key={2} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '3':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '4':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+            <img className='starLog' key={4} src={StarGrade} alt="Star" />
+          </span>
+        );
+      case '5':
+        return (
+          <span className='star-container'>
+            <img className='starLog' key={1} src={StarGrade} alt="Star" />
+            <img className='starLog' key={2} src={StarGrade} alt="Star" />
+            <img className='starLog' key={3} src={StarGrade} alt="Star" />
+            <img className='starLog' key={4} src={StarGrade} alt="Star" />
+            <img className='starLog' key={5} src={StarGrade} alt="Star" />
+          </span>
+        );
+      default:
+        return <div></div>;
+    }
+  }
 
 
   return (
@@ -73,6 +144,8 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
                       <p className='over-view-info-p-one'>Våning:</p>
                       <p className='over-view-info-p-one'>Inflytt:</p>
                       <p className='over-view-info-p-one'>Ansök senast:</p>
+                      <p className='over-view-info-p-one'>Hyresvärd:</p>
+                      <p className='over-view-info-p-one'>Betyg:</p>
                     </div>
                     <div className="over-view-apartement-info-box">
                       <p className='over-view-info-p-two'>{apartement.rent}</p>
@@ -80,6 +153,8 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
                       <p className='over-view-info-p-two'>{apartement.floor}</p>
                       <p className='over-view-info-p-two'>{apartement.available}</p>
                       <p className='over-view-info-p-two'>{apartement.apply}</p>
+                      <p className='over-view-info-p-two'>{apartement.landLord}</p>
+                      <p className='over-view-info-p-two'>{showGrades()}</p>
                     </div>
                   </div>
                 </div>
@@ -102,7 +177,7 @@ const ApplyComponent: React.FC<DetailshouseProps> = ({ apartement }) => {
             </div>
             <div className="apply-content-right-botton">
               <div className="group-apply">
-                <input className='checkbox-apply' type="radio" name="" id="" />
+                <input className='checkbox-apply' type="radio" name="" id="" checked={acceptTerms} onChange={handleTerms} />
                 <p>Jag godkänner villkoren</p>
               </div>
               <button className='apply-btn-apartement' onClick={handleApplicationSubmit}>ANSÖK</button>

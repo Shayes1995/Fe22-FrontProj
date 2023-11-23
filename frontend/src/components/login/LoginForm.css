@@ -1,6 +1,6 @@
 .div-main-container-login {
   padding: 0;
-  margin-top: 4.2rem;
+  margin-top: 4rem;
 }
 
 .login-container {
@@ -25,7 +25,8 @@
 
 
 .login-hero {
-  height: 35.556vh;
+  height: 40.556vh;
+  max-height: 24.0625rem;
   width: 100%;
   background-image: url('../img/imgLogin/heroLogin.png');
   background-size: cover;
@@ -38,6 +39,12 @@
 
   @media screen and (max-width: 768px) {
     height: 16.075rem;
+
+    @media screen and (max-width: 568px) {
+      height: 11.8075rem;
+
+    }
+
 
   }
 
@@ -142,6 +149,13 @@
 }
 
 .login-text-please {
+
+  color: #000;
+  font-family: Kumbh Sans;
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
   @media screen and (max-width: 768px) {
     color: #000;
@@ -266,13 +280,19 @@
   border: none;
   background: #E78121;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: white;
-  width: 8rem;
+  width: 9.5rem;
   height: 2.5rem;
-  font-family: 'Montserrat';
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   cursor: pointer;
   align-self: center;
   margin-bottom: 5rem;
+  margin-top: 1rem;
 }
 
 .to-register-tag-p {

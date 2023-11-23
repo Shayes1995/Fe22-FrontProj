@@ -9,7 +9,8 @@
 
 .home-imgBanner {
   background-image: url('../img/imgHome/HomeBannerImg.png');
-  height: 35.556vh;
+  height: 40.556vh;
+  max-height: 24.0625rem;
   flex-shrink: 0;
   width: 100%;
   background-size: cover;
@@ -19,10 +20,16 @@
   text-align: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 4rem;
 
   @media screen and (max-width: 768px) {
-    height: 23.49vh;
-    margin-top: 4rem;
+    height: 16.075rem;
+
+    @media screen and (max-width: 568px) {
+      height: 11.8075rem;
+
+    }
+
 
   }
 }
@@ -33,6 +40,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
 .img-home-container h1 {
@@ -44,6 +52,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-top: 1rem;
 
   @media screen and (max-width: 768px) {
     color: #FFF;
@@ -54,7 +63,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -62,15 +71,18 @@
 
 .box-row {
   width: 70%;
-  max-width: 70rem;
-  height: 7rem;
-  margin-top: 2rem;
+  max-width: 40rem;
+  height: 6rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 
   @media screen and (max-width: 768px) {
-    height: 6.25rem;
+    height: 5.25rem;
+    margin-top: 1.5rem;
+    justify-content: space-around;
   }
 }
 
@@ -80,9 +92,52 @@
   align-self: top;
   text-align: center;
 
+
   @media screen and (max-width: 768px) {
-    padding: .5rem;
+    padding: .8rem;
+
+
+    @media screen and (max-width: 468px) {
+      padding: .7rem;
+
+
+      @media screen and (max-width: 390px) {
+        padding: .5rem;
+      }
+    }
   }
+}
+
+.active-filter-home {
+
+  position: relative;
+
+}
+
+@keyframes underlineFadeIn {
+  from {
+    width: 0;
+    opacity: 0;
+    left: 50%;
+  }
+
+  to {
+    width: 100%;
+    opacity: 1;
+    left: 0;
+  }
+}
+
+.active-filter-home p::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  animation: underlineFadeIn 0.5s forwards;
+  /* Adjust duration as needed */
 }
 
 .icon-logs {
@@ -103,6 +158,8 @@
   font-weight: 400;
   line-height: normal;
 
+
+
   @media screen and (max-width: 768px) {
     color: #000;
     font-family: Montserrat;
@@ -110,6 +167,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
   }
 
 
@@ -131,21 +189,41 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-around;
-  padding: 1rem;
+
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
+
+
+
 
 
 
 .apartement-item {
   border-radius: 5px;
-  width: 21.75rem;
+  width: 100%;
+  height: 100%;
+  max-width: 18.75rem;
+  max-height: 22.84094rem;
   transition: 0.3s;
+  padding: 1rem;
 
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    max-width: 21.75rem;
+    max-width: 20.75rem;
     height: 22.8125rem;
+
+    @media screen and (max-width: 380px) {
+      width: 17rem;
+      max-width: 20.75rem;
+      height: 22.8125rem;
+      padding: 1rem;
+    }
   }
 
 
@@ -215,7 +293,7 @@ h3 {
 
 .apartement-image img {
   max-width: 100%;
-  height: auto;
+  height: 15.76963rem;
   border-radius: 0.625rem;
 
   @media screen and (max-width: 768px) {
@@ -240,11 +318,12 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .carousel-dots span {
   display: inline-block;
-  width: 7px;
+  width: 10px;
   height: 7px;
   margin: 0 5px;
   background-color: rgba(255, 255, 255, 0.72);
@@ -699,4 +778,34 @@ input[type="number"] {
     width: 8.875rem;
     height: 3.0625rem;
   }
+}
+
+.load-more-btn {
+  width: 9.25rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 3.125rem;
+  background: #E78121;
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  text-transform: uppercase;
+  margin-top: 2rem;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
+
+}
+
+.align-left-pay {
+  text-align: left;
+}
+
+.align-right-pay {
+  text-align: right;
 }

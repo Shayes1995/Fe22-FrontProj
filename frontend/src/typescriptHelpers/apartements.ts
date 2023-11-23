@@ -13,12 +13,14 @@ export interface Apartement {
   unitType: string;
   area: string;
   floor: string;
-  rent: string;
+  rent: number;
   rooms: string;
   size: string;
   city: string;
   street: string;
   zipcode: string;
+  landLord: string;
+  grades: string;
   apply: string;
   includes: {
     name: string;
@@ -42,7 +44,26 @@ export type QuickFilterType = BuildingType | null;
 export interface Application {
   _id: string;
   apartement: Apartement;
-  user: Users ;
+  user: Users;
   status: string;
   __v: number;
+}
+
+
+export interface Payment {
+  _id: string;
+  user: Users;
+  application: Application;
+  amount: number;
+  createdDate: number;
+}
+
+export interface Residents {
+  _id: string;
+  user: Users;
+  application: Application;
+  apartement: Apartement;
+  payment: Payment;
+  createdDate: number;
+
 }
